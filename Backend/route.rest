@@ -1,0 +1,37 @@
+GET http://localhost:3000/adminUser
+
+###
+
+GET http://localhost:3000/subscribers/5ebd4a7584a8ba210da6ebc8
+
+###
+
+POST http://localhost:3000/adminUser
+Content-Type: application/json
+
+{
+    "fullName": "Senura Diwantha",
+    "userName": "senura",
+    "password": "senura",
+    "role": "store manager",
+    "email": "senura.d@gmail.com",
+    "contactNo": "0779822332"
+}
+
+
+###
+
+DELETE http://localhost:3000/subscribers/5ebd4a7584a8ba210da6ebc8
+
+
+###
+
+PATCH http://localhost:3000/subscribers/5ebd4fd1a4d69e0354e51a03
+Content-Type: application/json
+
+{
+    "name": "Viraj Konthasinghe"
+}
+
+###
+
