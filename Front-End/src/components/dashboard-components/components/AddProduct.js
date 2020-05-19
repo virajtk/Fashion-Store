@@ -18,7 +18,7 @@ class AddProduct extends Component {
             price: '',
             discount:'',
             brand: '',
-            colour: '',
+            color: '',
             productTypeList: []
         };
     }
@@ -66,7 +66,16 @@ class AddProduct extends Component {
                     'Accept': 'application/json',
                     'Content-type': 'application/json',
                 },
-                body: JSON.stringify(this.state)
+                body: JSON.stringify({
+                    "mainCategory": this.state.mainCategory,
+                    "productType": this.state.productType,
+                    "productName": this.state.productName,
+                    "description": this.state.description,
+                    "price": this.state.price,
+                    "discount": this.state.discount,
+                    "brand": this.state.brand,
+                    "color": this.state.color,
+                })
             });
 
             console.log('Result: '+ result);
@@ -85,7 +94,7 @@ class AddProduct extends Component {
 
 
     render() {
-        const { productTypeList } = this.state;
+
         return (
             <div>
                 <div>
@@ -132,7 +141,7 @@ class AddProduct extends Component {
                                 <input
                                        type="text"
                                        className="form-control style-input"
-                                       placeholder="Sub Category"
+                                       placeholder="Product Name"
                                        name="productName"
                                        value={this.state.productName}
                                        onChange={this.handleChange}
@@ -188,8 +197,8 @@ class AddProduct extends Component {
                                     type="text"
                                     className="form-control style-input"
                                     placeholder="Colour"
-                                    name="colour"
-                                    value={this.state.colour}
+                                    name="color"
+                                    value={this.state.color}
                                     onChange={this.handleChange}
                                 />
                             </div>

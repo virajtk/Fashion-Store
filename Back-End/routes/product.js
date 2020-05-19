@@ -41,13 +41,13 @@ router.get('/findProductType/:mainCategory', async (req,res) => {
 // Creating One
 router.post('/addproduct', async (req,res) => {
     const product = new Product({
-        name: req.body.name,
-        brandName: req.body.brandName,
+        productName: req.body.productName,
+        brand: req.body.brand,
         description: req.body.description,
         price: req.body.price,
         discount: req.body.discount,
         mainCategory: req.body.mainCategory,
-        category: req.body.category,
+        productType: req.body.productType,
         color: req.body.color,
     })
 
@@ -60,11 +60,11 @@ router.post('/addproduct', async (req,res) => {
 })
 // Updating One
 router.patch('/:id', getProduct , async (req,res) => {
-    if (req.body.name != null) {
-        res.product.name = req.body.name
+    if (req.body.productName != null) {
+        res.product.productName = req.body.productName
     }
-    if (req.body.brandName != null) {
-        res.product.brandName = req.body.brandName
+    if (req.body.brand != null) {
+        res.product.brand = req.body.brand
     }
     if (req.body.description != null) {
         res.product.description = req.body.description
@@ -78,8 +78,8 @@ router.patch('/:id', getProduct , async (req,res) => {
     if (req.body.mainCategory != null) {
         res.product.mainCategory = req.body.mainCategory
     }
-    if (req.body.category != null) {
-        res.product.category = req.body.category
+    if (req.body.productType != null) {
+        res.product.productType = req.body.productType
     }
     if (req.body.color != null) {
         res.product.color = req.body.color
