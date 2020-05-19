@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Product = require('../models/Product')
+const ProductCategory = require('../models/ProductCategory')
 
 // Getting all
 router.get('/', async (req,res) => {
@@ -17,8 +18,28 @@ router.get('/:id', getProduct , (req,res) => {
     res.json(res.product)
 })
 
+// Getting Selected Category
+router.get('/findProductType/:mainCategory', async (req,res) => {
+
+    let productTypeList = [];
+    try {
+        productTypeList = await ProductCategory.find({
+            "mainCategory" : req.params.mainCategory
+        });
+        if ( productTypeList == null ) {
+            return res.status(404).json({ message: 'Cannot find Product' })
+        }
+        else {
+            res.json(productTypeList);
+        }
+    } catch (err) {
+        return res.status(500).json({ message : err.message})
+    }
+
+});
+
 // Creating One
-router.post('/', async (req,res) => {
+router.post('/addproduct', async (req,res) => {
     const product = new Product({
         name: req.body.name,
         brandName: req.body.brandName,
@@ -27,6 +48,7 @@ router.post('/', async (req,res) => {
         discount: req.body.discount,
         mainCategory: req.body.mainCategory,
         category: req.body.category,
+        color: req.body.color,
     })
 
     try{
@@ -58,6 +80,9 @@ router.patch('/:id', getProduct , async (req,res) => {
     }
     if (req.body.category != null) {
         res.product.category = req.body.category
+    }
+    if (req.body.color != null) {
+        res.product.color = req.body.color
     }
     try {
         const updatedProduct = await res.product.save()
