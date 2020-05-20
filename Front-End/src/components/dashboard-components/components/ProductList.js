@@ -32,7 +32,7 @@ class ProductList extends Component {
                                 <td>Blue Frock</td>
                                 <td>Pretty</td>
                                 <td>Rs.2000.0</td>
-                                <td>Nolimit</td>
+                                <td>No limit</td>
                                 <td>Blue</td>
                                 <td>Approved</td>
                                 <td>
