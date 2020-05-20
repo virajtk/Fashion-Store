@@ -39,6 +39,10 @@ app.use('/category', productCategoryRouter)
 const productRouter = require('./routes/product')
 app.use('/product', productRouter)
 
+//user
+const userRouter = require('./routes/users')
+app.use('/user', userRouter)
+
 
 app.listen(3000, () => {
     console.log('Server Started');
