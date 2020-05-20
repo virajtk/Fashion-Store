@@ -38,24 +38,22 @@ class DashboardLayout extends Component {
                                         <li>
                                             <a href="javascript:void(0)" aria-expanded="true"><i className="ti-briefcase" /><span>Category Management</span></a>
                                             <ul className="collapse">
-                                                <li><a href="/newcategory">Add Category</a></li>
-                                                <li><a href="/categorylist">Category List</a></li>
-                                                <li><a href="">Manage Category </a></li>
+                                                <li><a href="/newcategory"><i className="ti-plus" /> <span>Add Category</span></a></li>
+                                                <li><a href="/categorylist"><i className="ti-list" /> <span>Category List</span></a></li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0)" aria-expanded="true"><i className=" ti-layout-grid2" /><span>Product Management</span></a>
+                                            <a href="javascript:void(0)" aria-expanded="true"><i className=" ti-layout-grid2" /><span>User Management</span></a>
                                             <ul className="collapse">
-                                                <li><a href="/addproduct">Add Product</a></li>
-                                                <li><a href="/productlist">Product List</a></li>
-                                                <li><a href="">Manage Product</a></li>
+                                                <li><a href="/addproduct"><i className="ti-plus" /> <span>Add Store Manager</span></a></li>
+                                                <li><a href="/productlist"><i className="ti-user" /> <span>Manage Users</span></a></li>
                                             </ul>
                                         </li>
-                                        <li><a href=""><i className="ti-gift" /> <span>Flash Deals</span></a></li>
-                                        <li><a href=""><i className="ti-home" /> <span>Store Management</span></a></li>
-                                        <li>
+                                        
+                                        {/* <li><a href=""><i className="ti-home" /> <span>Store Management</span></a></li> */}
+                                        {/* <li>
                                             <a href="javascript:void(0)" aria-expanded="true"><i className="fa fa-align-left" /> <span>Multi
-                          level menu</span></a>
+                                                level menu</span></a>
                                             <ul className="collapse">
                                                 <li><a href="#">Item level (1)</a></li>
                                                 <li><a href="#">Item level (1)</a></li>
@@ -68,7 +66,7 @@ class DashboardLayout extends Component {
                                                 </li>
                                                 <li><a href="#">Item level (1)</a></li>
                                             </ul>
-                                        </li>
+                                        </li> */}
                                     </ul>
                                 </nav>
                             </div>
@@ -252,7 +250,7 @@ class DashboardLayout extends Component {
                                     <div className="breadcrumbs-area clearfix">
                                         <h4 className="page-title pull-left">Dashboard</h4>
                                         <ul className="breadcrumbs pull-left">
-                                            <li><a href="index.html">Home</a></li>
+                                            <li><a href="/">Home</a></li>
                                             <li><span>Dashboard</span></li>
                                         </ul>
                                     </div>

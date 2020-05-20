@@ -1,27 +1,25 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 
-class AddCategory extends Component {
+class EditCategory extends Component {
   constructor(props) {
     super(props);
     this.state = {
       subCategory: "",
       mainCategory: "",
       description: "",
-      redirect: null
     };
   }
 
   onSubmitHandler = (e) => {
     e.preventDefault();
-    // alert(JSON.stringify(this.state));
+    alert(JSON.stringify(this.state));
     this.postData();
   };
 
   async postData() {
     try {
       let result = await fetch("http://localhost:3000/category", {
-        method: "post",
+        method: "patch",
         headers: {
           "Accept": "application/json",
           "Content-type": "application/json",
@@ -30,7 +28,6 @@ class AddCategory extends Component {
       });
 
       console.log("Result: " + result);
-      this.setState({ redirect: "/categorylist" });
     } catch (error) {
       console.log(error.message);
     }
@@ -45,13 +42,10 @@ class AddCategory extends Component {
   };
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to={this.state.redirect} />
-    }
     return (
       <div>
         <div>
-          <h4 className="header-title">Add New Category</h4>
+          <h4 className="header-title">Edit Category</h4>
         </div>
         <form onSubmit={this.onSubmitHandler} autoComplete="off">
           <div className="row">
@@ -64,7 +58,6 @@ class AddCategory extends Component {
                   name="mainCategory"
                   value={this.state.mainCategory}
                   onChange={this.onChangeHandler}
-                  required
                 >
                   <option selected="selected"> </option>
                   <option value="Woman Wear">Woman Wear</option>
@@ -85,7 +78,6 @@ class AddCategory extends Component {
                   name="subCategory"
                   value={this.state.subCategory}
                   onChange={this.onChangeHandler}
-                  required
                 />
                 <small id="emailHelp" className="form-text text-muted">
                   This category should be related to the main category.
@@ -100,7 +92,6 @@ class AddCategory extends Component {
                   name="description"
                   value={this.state.description}
                   onChange={this.onChangeHandler}
-                  required
                 ></textarea>
               </div>
               <div className="form-check text-left">
@@ -108,7 +99,6 @@ class AddCategory extends Component {
                   type="checkbox"
                   className="form-check-input"
                   id="exampleCheck1"
-                  required
                 />
                 <label className="form-check-label" htmlFor="exampleCheck1">
                   Confirmation
@@ -131,4 +121,4 @@ class AddCategory extends Component {
   }
 }
 
-export default AddCategory;
+export default EditCategory;
