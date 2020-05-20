@@ -43,23 +43,8 @@ class Register extends Component {
                                                 <div className="text-danger" />
                                             </div>
                                             <div className="form-gp">
-                                                <label htmlFor="exampleInputRole1">Role</label>
-                                                <i className="ti-face-smile" />
-                                                <div className="text-danger" />
-                                            </div>
-                                            <label className="form-gp"> </label>
-                                            <div className="form-gp">
-                                                <select className="custom-select style-input select-style">
-                                                    <option selected="selected"> </option>
-                                                    <option value="Customer">As Customer</option>
-                                                    <option value="Admin">As Admin</option>
-                                                    <option value="Manager">As Manager</option>
-                                                </select>
-                                                <div className="text-danger" />
-                                            </div>
-                                            <div className="form-gp">
                                                 <label htmlFor="exampleInputContactNo1">Contact No</label>
-                                                <input type="number" id="exampleInputContactNo1" />
+                                                <input type="text" id="exampleInputContactNo1" />
                                                 <i className="ti-mobile" />
                                                 <div className="text-danger" />
                                             </div>

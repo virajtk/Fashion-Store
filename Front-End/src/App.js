@@ -7,15 +7,33 @@ import Register from "./components/register-components/Register";
 import AddAccount from './components/admin-components/AddAccount';
 import AddCategory from './components/dashboard-components/components/AddCategory';
 
+import DashboardLogin from "./components/admin-components/DashboardLogin";
+import DashboardRegister from "./components/admin-components/DashboardRegister";
+
+
+import customerLayout from "./components/Customer-Dashboard-Component/customerLayout";
+
 function App() {
   return (
     < div className="App">
-        <DashboardLayout />
+        {/*<DashboardLayout />*/}
+
         {/* <Login/> */}
-        {/* <MainHomeLayout /> */}
+         <MainHomeLayout />
+        {/* <Register/>*/}
+        {/* <AddAccount /> */}
+        {/* <AddCategory /> */}
+        {/*<DashboardLogin/>*/}
+        {/*<DashboardRegister/>*/}
+
+        {/*<customerLayout />*/}
+        {/*<DetailProductPage/>*/}
+        {/* <Login/> */}
+        
         {/* <Register/> */}
         {/* <AddAccount /> */}
         {/* <AddCategory /> */}
+        {/*<Route exact path ="/product/:productId" component={Auth(DetailProductPage, null)},*/}
 
     </div>
   );
