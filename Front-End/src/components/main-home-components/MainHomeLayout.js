@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import Categories from "./Categories";
+import Categories from "./components/Categories";
+import SelectedItem from "./components/SelectedItem";
+import Checkout from "./components/Checkout";
 
 class MainHomeLayout extends Component {
     render() {
@@ -274,12 +276,14 @@ class MainHomeLayout extends Component {
                     </div>
                     {/* header area end */}
                     {/* page title area end */}
+
                     <div className="main-content-inner">
                         <div className="container">
                             <div className="row">
                                 <div className="col-lg-12">
-
-                                    <Categories />
+                                    <SelectedItem />
+                                    {/*<Checkout/>*/}
+                                    {/*<Categories />*/}
 
                                 </div>
                             </div>
@@ -290,17 +294,13 @@ class MainHomeLayout extends Component {
                     <footer>
                         <div className="home-footer-area">
                             <div className="social-links-warp">
-                                <div className="container">
-                                    <div className="social-links">
-                                        <a href="" className="instagram"><i className="fa fa-instagram"/><span>instagram</span></a>
-                                        <a href="" className="google-plus"><i className="fa fa-google-plus"/><span>g+plus</span></a>
-                                        <a href="" className="pinterest"><i className="fa fa-pinterest"/><span>pinterest</span></a>
-                                        <a href="" className="facebook"><i className="fa fa-facebook"/><span>facebook</span></a>
-                                        <a href="" className="twitter"><i className="fa fa-twitter"/><span>twitter</span></a>
-                                        <a href="" className="youtube"><i className="fa fa-youtube"/><span>youtube</span></a>
-                                        <a href="" className="tumblr"><i className="fa fa-tumblr-square"></i><span>tumblr</span></a>
-                                    </div>
-                                </div>
+                                <a href="" className="instagram"><i className="fa fa-instagram"/><span>instagram</span></a>
+                                <a href="" className="google-plus"><i className="fa fa-google-plus"/><span>g+plus</span></a>
+                                <a href="" className="pinterest"><i className="fa fa-pinterest"/><span>pinterest</span></a>
+                                <a href="" className="facebook"><i className="fa fa-facebook"/><span>facebook</span></a>
+                                <a href="" className="twitter"><i className="fa fa-twitter"/><span>twitter</span></a>
+                                <a href="" className="youtube"><i className="fa fa-youtube"/><span>youtube</span></a>
+                                <a href="" className="tumblr"><i className="fa fa-tumblr-square"/><span>tumblr</span></a>
                             </div>
                             <p>© Copyright 2020 <a href="">Divisima</a>. All right reserved. Developed by <a href="">Team BackSlash</a>.</p>
                         </div>
