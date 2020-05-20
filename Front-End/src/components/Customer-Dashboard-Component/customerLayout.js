@@ -4,12 +4,10 @@ import {
     Switch,
     Route } from "react-router-dom";
 
-import AddCategory from "./components/AddCategory";
-import CategoryList from "./components/CategoryList";
-import AddProduct from "./components/AddProduct";
-import ProductList from "./components/ProductList";
+import AddtoCart from "./components/AddtoCart";
+import WishList from "./components/WishList";
 
-class DashboardLayout extends Component {
+class customerLayout extends Component {
     render() {
         return (
             <div>
@@ -34,35 +32,26 @@ class DashboardLayout extends Component {
                             <div className="menu-inner">
                                 <nav>
                                     <ul className="metismenu" id="menu">
-                                        <li className="active"><a href="/"><i className="ti-dashboard" /> <span>dashboard</span></a></li>
+                                        <li className="active"><a href="/"><i className="ti-dashboard" /> <span>Customer Dashboard</span></a></li>
                                         <li>
-                                            <a href="javascript:void(0)" aria-expanded="true"><i className=" ti-layout-grid2" /><span>User Management</span></a>
+                                            <a href="javascript:void(0)" aria-expanded="true"><i className="ti-briefcase" /><span>Cart Management</span></a>
                                             <ul className="collapse">
-                                                <li><a href="/addproduct"><i className="ti-plus" /> <span>Add Store Manager</span></a></li>
-                                                <li><a href="/productlist"><i className="ti-user" /> <span>Manage Users</span></a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" aria-expanded="true"><i className="ti-briefcase" /><span>Category Management</span></a>
-                                            <ul className="collapse">
-                                                <li><a href="/newcategory"><i className="ti-plus" /> <span>Add Category</span></a></li>
-                                                <li><a href="/categorylist"><i className="ti-list" /> <span>Category List</span></a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" aria-expanded="true"><i className=" ti-layout-grid2" /><span>Product Management</span></a>
-                                            <ul className="collapse">
-                                                <li><a href="/addproduct">Add Product</a></li>
-                                                <li><a href="/productlist">Product List</a></li>
-                                                <li><a href="">Manage Product</a></li>
-                                            </ul>
-                                        </li>
+                                                <li><a href="/cart">Add to Cart</a></li>
 
-                                        {/* <li><a href=""><i className="ti-gift" /> <span>Flash Deals</span></a></li> */}
-                                        <li><a href=""><i className="ti-home" /> <span>Store Management</span></a></li>
-                                        {/* <li>
-                                            <a href="javascript:void(0)" aria-expanded="true"><i className="fa fa-align-left" /> <span>Multi
-                          level menu</span></a>
+                                                <li><a href="">Manage Your Cart </a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)" aria-expanded="true"><i className=" ti-layout-grid2" /><span>WishList Management</span></a>
+                                            <ul className="collapse">
+                                                <li><a href="/wishlist">Add to WishList</a></li>
+
+                                                <li><a href="">Manage Your WishList</a></li>
+                                            </ul>
+                                        </li>
+*/}
+                                        <li>
+
                                             <ul className="collapse">
                                                 <li><a href="#">Item level (1)</a></li>
                                                 <li><a href="#">Item level (1)</a></li>
@@ -75,7 +64,7 @@ class DashboardLayout extends Component {
                                                 </li>
                                                 <li><a href="#">Item level (1)</a></li>
                                             </ul>
-                                        </li> */}
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>
@@ -285,17 +274,11 @@ class DashboardLayout extends Component {
                                         <div className="card-body">
                                             <Router>
                                                 <Switch>
-                                                    <Route path="/newcategory">
-                                                        <AddCategory />
+                                                    <Route path="/cart">
+                                                        <AddtoCart />
                                                     </Route>
-                                                    <Route path="/categorylist">
-                                                        <CategoryList />
-                                                    </Route>
-                                                    <Route path="/addproduct">
-                                                        <AddProduct />
-                                                    </Route>
-                                                    <Route path="/productlist">
-                                                        <ProductList />
+                                                    <Route path="/wishlist">
+                                                        <WishList />
                                                     </Route>
                                                 </Switch>
                                             </Router>
@@ -498,4 +481,4 @@ class DashboardLayout extends Component {
     }
 }
 
-export default DashboardLayout;
+export default customerLayout;
