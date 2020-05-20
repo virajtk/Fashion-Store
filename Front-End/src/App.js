@@ -6,17 +6,20 @@ import MainHomeLayout from "./components/main-home-components/MainHomeLayout";
 import Register from "./components/register-components/Register";
 import AddAccount from './components/admin-components/AddAccount';
 import AddCategory from './components/dashboard-components/components/AddCategory';
+import DashboardLogin from "./components/admin-components/DashboardLogin";
+import DashboardRegister from "./components/admin-components/DashboardRegister";
 
 function App() {
   return (
     < div className="App">
-        <DashboardLayout />
+        {/*<DashboardLayout />*/}
         {/* <Login/> */}
-        {/* <MainHomeLayout /> */}
-        {/* <Register/> */}
+         <MainHomeLayout />
+        {/* <Register/>*/}
         {/* <AddAccount /> */}
         {/* <AddCategory /> */}
-
+        {/*<DashboardLogin/>*/}
+        {/*<DashboardRegister/>*/}
     </div>
   );
 }
