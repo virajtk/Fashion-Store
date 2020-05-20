@@ -36,11 +36,17 @@ class DashboardLayout extends Component {
                                     <ul className="metismenu" id="menu">
                                         <li className="active"><a href="/"><i className="ti-dashboard" /> <span>dashboard</span></a></li>
                                         <li>
+                                            <a href="javascript:void(0)" aria-expanded="true"><i className=" ti-layout-grid2" /><span>User Management</span></a>
+                                            <ul className="collapse">
+                                                <li><a href="/addproduct"><i className="ti-plus" /> <span>Add Store Manager</span></a></li>
+                                                <li><a href="/productlist"><i className="ti-user" /> <span>Manage Users</span></a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
                                             <a href="javascript:void(0)" aria-expanded="true"><i className="ti-briefcase" /><span>Category Management</span></a>
                                             <ul className="collapse">
-                                                <li><a href="/newcategory">Add Category</a></li>
-                                                <li><a href="/categorylist">Category List</a></li>
-                                                <li><a href="">Manage Category </a></li>
+                                                <li><a href="/newcategory"><i className="ti-plus" /> <span>Add Category</span></a></li>
+                                                <li><a href="/categorylist"><i className="ti-list" /> <span>Category List</span></a></li>
                                             </ul>
                                         </li>
                                         <li>
@@ -51,9 +57,10 @@ class DashboardLayout extends Component {
                                                 <li><a href="">Manage Product</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href=""><i className="ti-gift" /> <span>Flash Deals</span></a></li>
+
+                                        {/* <li><a href=""><i className="ti-gift" /> <span>Flash Deals</span></a></li> */}
                                         <li><a href=""><i className="ti-home" /> <span>Store Management</span></a></li>
-                                        <li>
+                                        {/* <li>
                                             <a href="javascript:void(0)" aria-expanded="true"><i className="fa fa-align-left" /> <span>Multi
                           level menu</span></a>
                                             <ul className="collapse">
@@ -68,7 +75,7 @@ class DashboardLayout extends Component {
                                                 </li>
                                                 <li><a href="#">Item level (1)</a></li>
                                             </ul>
-                                        </li>
+                                        </li> */}
                                     </ul>
                                 </nav>
                             </div>
