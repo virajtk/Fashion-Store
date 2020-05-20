@@ -1,35 +1,36 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 
 class AddCategory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        subCategory:'',
-        mainCategory: '',
-        description: ''
+      subCategory: "",
+      mainCategory: "",
+      description: "",
+      redirect: null
     };
   }
 
   onSubmitHandler = (e) => {
-    e.preventDefault()
-    alert(JSON.stringify(this.state));
+    e.preventDefault();
+    // alert(JSON.stringify(this.state));
     this.postData();
-
   };
 
   async postData() {
     try {
-      let result = await fetch('http://localhost:3000/category', {
-        method: 'post',
+      let result = await fetch("http://localhost:3000/category", {
+        method: "post",
         headers: {
-          'Accept': 'application/json',
-          'Content-type': 'application/json',
+          "Accept": "application/json",
+          "Content-type": "application/json",
         },
-        body: JSON.stringify(this.state)
+        body: JSON.stringify(this.state),
       });
 
-      console.log('Result: '+ result);
-      
+      console.log("Result: " + result);
+      this.setState({ redirect: "/categorylist" });
     } catch (error) {
       console.log(error.message);
     }
@@ -44,6 +45,9 @@ class AddCategory extends Component {
   };
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />
+    }
     return (
       <div>
         <div>
@@ -60,14 +64,15 @@ class AddCategory extends Component {
                   name="mainCategory"
                   value={this.state.mainCategory}
                   onChange={this.onChangeHandler}
+                  required
                 >
                   <option selected="selected"> </option>
-                  <option value="woman-wear">Woman wear</option>
-                  <option value="men-wear">Men wear</option>
-                  <option value="children">Children</option>
-                  <option value="bags-and-purses">Bags and Purses</option>
-                  <option value="footwear">Footwear</option>
-                  <option value="jewellery">Jewellery</option>
+                  <option value="Woman Wear">Woman Wear</option>
+                  <option value="Men Wear">Men Wear</option>
+                  <option value="Children">Children</option>
+                  <option value="Bags and Purses">Bags and Purses</option>
+                  <option value="Footwear">Footwear</option>
+                  <option value="Jewellery">Jewellery</option>
                 </select>
               </div>
               <div className="form-group">
@@ -80,6 +85,7 @@ class AddCategory extends Component {
                   name="subCategory"
                   value={this.state.subCategory}
                   onChange={this.onChangeHandler}
+                  required
                 />
                 <small id="emailHelp" className="form-text text-muted">
                   This category should be related to the main category.
@@ -94,6 +100,7 @@ class AddCategory extends Component {
                   name="description"
                   value={this.state.description}
                   onChange={this.onChangeHandler}
+                  required
                 ></textarea>
               </div>
               <div className="form-check text-left">
@@ -101,6 +108,7 @@ class AddCategory extends Component {
                   type="checkbox"
                   className="form-check-input"
                   id="exampleCheck1"
+                  required
                 />
                 <label className="form-check-label" htmlFor="exampleCheck1">
                   Confirmation
