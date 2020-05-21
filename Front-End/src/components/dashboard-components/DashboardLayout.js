@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 import AddCategory from "./components/AddCategory";
 import CategoryList from "./components/CategoryList";
@@ -66,10 +66,10 @@ class DashboardLayout extends Component {
                     <ul className="metismenu" id="menu">
                       <li className="active">
                         <a>
-                          <Link to="/">
+                          <NavLink to="/" exact activeStyle={{ color: "red" }}>
                             <i className="ti-dashboard" />{" "}
-                            <span>dashboard</span>
-                          </Link>
+                            <span>Dashboard</span>
+                          </NavLink>
                         </a>
                       </li>
                       <li>
@@ -80,18 +80,26 @@ class DashboardLayout extends Component {
                         <ul className="collapse">
                           <li>
                             <a>
-                              <Link to="/adminreg">
-                                <i className="ti-plus" />{" "}
+                              <NavLink
+                                to="/adminreg"
+                                exact
+                                activeStyle={{ color: "red" }}
+                              >
+                                > <i className="ti-plus" />{" "}
                                 <span>Add Manager</span>
-                              </Link>
+                              </NavLink>
                             </a>
                           </li>
                           <li>
                             <a>
-                              <Link to="/adminlist">
-                                <i className="ti-user" />{" "}
+                              <NavLink
+                                to="/adminlist"
+                                exact
+                                activeStyle={{ color: "red" }}
+                              >
+                                > <i className="ti-user" />{" "}
                                 <span>Manage Users</span>
-                              </Link>
+                              </NavLink>
                             </a>
                           </li>
                         </ul>
@@ -103,15 +111,27 @@ class DashboardLayout extends Component {
                         </a>
                         <ul className="collapse">
                           <li>
-                            <a href="/newcategory">
-                              <i className="ti-plus" />{" "}
-                              <span>Add Category</span>
+                            <a>
+                              <NavLink
+                                to="/newcategory"
+                                exact
+                                activeStyle={{ color: "red" }}
+                              >
+                                > <i className="ti-plus" />{" "}
+                                <span>Add Category</span>
+                              </NavLink>
                             </a>
                           </li>
                           <li>
-                            <a href="/categorylist">
-                              <i className="ti-list" />{" "}
-                              <span>Category List</span>
+                            <a>
+                              <NavLink
+                                to="/categorylist"
+                                exact
+                                activeStyle={{ color: "red" }}
+                              >
+                                > <i className="ti-list" />{" "}
+                                <span>Category List</span>
+                              </NavLink>
                             </a>
                           </li>
                         </ul>
@@ -123,24 +143,37 @@ class DashboardLayout extends Component {
                         </a>
                         <ul className="collapse">
                           <li>
-                            <a href="/addproduct">Add Product</a>
+                            <a>
+                              <NavLink
+                                to="/addproduct"
+                                activeStyle={{ color: "red" }}
+                              >
+                                > <i className="ti-plus" />{" "}
+                                <span>Add Product</span>
+                              </NavLink>
+                            </a>
                           </li>
                           <li>
-                            <a href="/productlist">Product List</a>
-                          </li>
-                          <li>
-                            <a href="">Manage Product</a>
+                            <a>
+                              <NavLink
+                                to="/productlist"
+                                activeStyle={{ color: "red" }}
+                              >
+                                > <i className="ti-list" />{" "}
+                                <span>Product List</span>
+                              </NavLink>
+                            </a>
                           </li>
                         </ul>
                       </li>
 
                       {/* <li><a href=""><i className="ti-gift" /> <span>Flash Deals</span></a></li> */}
-                      <li>
+                      {/* <li>
                         <a href="">
                           <i className="ti-home" />{" "}
                           <span>Store Management</span>
                         </a>
-                      </li>
+                      </li> */}
                       {/* <li>
                                             <a href="javascript:void(0)" aria-expanded="true"><i className="fa fa-align-left" /> <span>Multi
                           level menu</span></a>
