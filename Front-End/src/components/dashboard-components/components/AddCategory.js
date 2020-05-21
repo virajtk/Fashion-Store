@@ -8,7 +8,7 @@ class AddCategory extends Component {
       subCategory: "",
       mainCategory: "",
       description: "",
-      redirect: null
+      redirect: null,
     };
   }
 
@@ -23,7 +23,7 @@ class AddCategory extends Component {
       let result = await fetch("http://localhost:3000/category", {
         method: "post",
         headers: {
-          "Accept": "application/json",
+          Accept: "application/json",
           "Content-type": "application/json",
         },
         body: JSON.stringify(this.state),
@@ -46,7 +46,7 @@ class AddCategory extends Component {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to={this.state.redirect} />
+      return <Redirect to={this.state.redirect} />;
     }
     return (
       <div>

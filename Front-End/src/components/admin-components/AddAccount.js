@@ -11,14 +11,13 @@ class AddAccount extends Component {
       contactNo: "",
       password: "",
       confirmPassword: "",
-      redirect: null
+      redirect: null,
     };
   }
 
   onSubmitHandler = (e) => {
     e.preventDefault();
     // alert(JSON.stringify(this.state));
-
     this.postData();
   };
 
@@ -27,14 +26,14 @@ class AddAccount extends Component {
       let result = await fetch("http://localhost:3000/adminUser", {
         method: "post",
         headers: {
-          "Accept": "application/json",
+          Accept: "application/json",
           "Content-type": "application/json",
         },
         body: JSON.stringify(this.state),
       });
 
       console.log("Result: " + result);
-      this.setState({ redirect: "/userlist" });
+      this.setState({ redirect: "/adminlist" });
     } catch (error) {
       console.log(error.message);
     }
@@ -50,7 +49,7 @@ class AddAccount extends Component {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to={this.state.redirect} />
+      return <Redirect to={this.state.redirect} />;
     }
     return (
       <div>
@@ -58,9 +57,9 @@ class AddAccount extends Component {
                 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
                 <![endif]*/}
         {/* preloader area start */}
-        <div id="preloader">
+        {/* <div id="preloader">
           <div className="loader" />
-        </div>
+        </div> */}
         {/* preloader area end */}
 
         {/* Add Account area start */}
