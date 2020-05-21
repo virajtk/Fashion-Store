@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import { Link, Router } from "react-router-dom";
 
 class AddCategory extends Component {
   constructor(props) {
@@ -8,7 +8,7 @@ class AddCategory extends Component {
       subCategory: "",
       mainCategory: "",
       description: "",
-      redirect: null,
+      link: null,
     };
   }
 
@@ -30,7 +30,7 @@ class AddCategory extends Component {
       });
 
       console.log("Result: " + result);
-      this.setState({ redirect: "/categorylist" });
+      this.setState({ link: "/categorylist" });
     } catch (error) {
       console.log(error.message);
     }
@@ -45,8 +45,8 @@ class AddCategory extends Component {
   };
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to={this.state.redirect} />;
+    if (this.state.link) {
+      return <Router><Link to={this.state.link} /></Router>;
     }
     return (
       <div>
