@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class AdminUserList extends Component {
   constructor(props) {
@@ -22,7 +24,16 @@ class AdminUserList extends Component {
       let result = fetch(API_URL, { method: "delete" });
 
       console.log("Result: " + result);
-      // this.setState({ redirect: "/adminlist" });
+      toast.success("✅ Category Deleted Succesfully !", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      this.componentDidMount();
     } catch (error) {
       console.log(error.message);
     }
