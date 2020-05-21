@@ -2,7 +2,7 @@ GET http://localhost:3000/category
 
 ###
 
-GET http://localhost:3000/adminUser/5ebf7fe72e8cbedb8c6019ca
+GET http://localhost:3000/adminUser/5ebf7f7a2e8cbedb8c6019c9
 
 ###
 

@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class CategoryList extends Component {
   constructor(props) {
@@ -10,23 +12,42 @@ class CategoryList extends Component {
   }
 
   editAction(category) {
-    alert("Edit = " + category._id);
+    // alert("Edit = " + category._id);
+    toast.success("☑️ Test", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
 
-  deleteAction(category) {
+  deleteAction = (category) => {
+    const API_URL = "http://localhost:3000/category/" + category._id;
 
-    const API_URL = 'http://localhost:3000/category/'+ category._id ;
-    
     try {
-        let result = fetch(API_URL, {method: "delete"});
-  
-        console.log("Result: " + result);
-      } catch (error) {
-        console.log(error.message);
-      }
+      let result = fetch(API_URL, { method: "delete" });
+      console.log("Result: " + result);
+      this.componentDidMount();
+      this.componentDidMount();
+      toast.success("☑️ Category Deleted Succesfully !", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     fetch("http://localhost:3000/category")
       .then((res) => res.json())
       .then((json) => {
@@ -49,6 +70,9 @@ class CategoryList extends Component {
     } else {
       return (
         <div>
+          <ToastContainer/>
+          {/* Same as */}
+          <ToastContainer />
           <h4 className="header-title">Manage Categories</h4>
           <div className="single-table">
             <div className="table-responsive">
