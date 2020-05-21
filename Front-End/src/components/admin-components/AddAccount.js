@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 
 class AddAccount extends Component {
   constructor(props) {
@@ -10,12 +11,33 @@ class AddAccount extends Component {
       contactNo: "",
       password: "",
       confirmPassword: "",
+      redirect: null,
     };
   }
 
-  onSubmitHandler = () => {
-    alert(JSON.stringify(this.state));
+  onSubmitHandler = (e) => {
+    e.preventDefault();
+    // alert(JSON.stringify(this.state));
+    this.postData();
   };
+
+  async postData() {
+    try {
+      let result = await fetch("http://localhost:3000/adminUser", {
+        method: "post",
+        headers: {
+          Accept: "application/json",
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(this.state),
+      });
+
+      console.log("Result: " + result);
+      this.setState({ redirect: "/adminlist" });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 
   onChangeHandler = (e) => {
     const { name, value } = e.target;
@@ -26,15 +48,18 @@ class AddAccount extends Component {
   };
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />;
+    }
     return (
       <div>
         {/*[if lt IE 8]>
                 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
                 <![endif]*/}
         {/* preloader area start */}
-        <div id="preloader">
+        {/* <div id="preloader">
           <div className="loader" />
-        </div>
+        </div> */}
         {/* preloader area end */}
 
         {/* Add Account area start */}
@@ -43,7 +68,7 @@ class AddAccount extends Component {
             <div className="row no-gutters">
               <div className="col-xl-4 offset-xl-8 col-lg-6 offset-lg-6">
                 <div className="login-box-s2 ptb--100">
-                  <form onSubmit={this.onSubmitHandler}>
+                  <form onSubmit={this.onSubmitHandler} autoComplete="off">
                     <div className="login-form-head">
                       <h4>Add Store Manager</h4>
                       <p>
@@ -60,6 +85,7 @@ class AddAccount extends Component {
                           name="fullName"
                           value={this.state.fullName}
                           onChange={this.onChangeHandler}
+                          required
                         />
                         <i className="ti-user" />
                         <div className="text-danger" />
@@ -67,11 +93,12 @@ class AddAccount extends Component {
                       <div className="form-gp">
                         <label htmlFor="exampleInputUsername1">Username</label>
                         <input
-                          type="text"
+                          type="userName"
                           id="inputUsername"
                           name="userName"
                           value={this.state.userName}
                           onChange={this.onChangeHandler}
+                          required
                         />
                         <i className="ti-id-badge" />
                         <div className="text-danger" />
@@ -86,6 +113,7 @@ class AddAccount extends Component {
                           name="email"
                           value={this.state.email}
                           onChange={this.onChangeHandler}
+                          required
                         />
                         <i className="ti-email" />
                         <div className="text-danger" />
@@ -112,6 +140,7 @@ class AddAccount extends Component {
                           name="password"
                           value={this.state.password}
                           onChange={this.onChangeHandler}
+                          required
                         />
                         <i className="ti-lock" />
                         <div className="text-danger" />
@@ -126,6 +155,7 @@ class AddAccount extends Component {
                           name="confirmPassword"
                           value={this.state.confirmPassword}
                           onChange={this.onChangeHandler}
+                          required
                         />
                         <i className="ti-lock" />
                         <div className="text-danger" />
