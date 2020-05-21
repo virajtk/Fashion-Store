@@ -69,7 +69,7 @@ class AddCategory extends Component {
                   <option selected="selected"> </option>
                   <option value="Woman Wear">Woman Wear</option>
                   <option value="Men Wear">Men Wear</option>
-                  <option value="Children">Children</option>
+                  <option value="Kids Wear">Kids Wear</option>
                   <option value="Bags and Purses">Bags and Purses</option>
                   <option value="Footwear">Footwear</option>
                   <option value="Jewellery">Jewellery</option>
