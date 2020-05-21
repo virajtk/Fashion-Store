@@ -64,9 +64,9 @@ class DashboardLayout extends Component {
                 <div className="menu-inner">
                   <nav>
                     <ul className="metismenu" id="menu">
-                      <li className="active">
+                      <li className="">
                         <a>
-                          <NavLink to="/" exact activeStyle={{ color: "red" }}>
+                          <NavLink to="/" exact activeStyle={{ color: "white" }}>
                             <i className="ti-dashboard" />{" "}
                             <span>Dashboard</span>
                           </NavLink>
@@ -83,9 +83,9 @@ class DashboardLayout extends Component {
                               <NavLink
                                 to="/adminreg"
                                 exact
-                                activeStyle={{ color: "red" }}
+                                activeStyle={{ color: "white" }}
                               >
-                                > <i className="ti-plus" />{" "}
+                                > {" "}
                                 <span>Add Manager</span>
                               </NavLink>
                             </a>
@@ -95,9 +95,9 @@ class DashboardLayout extends Component {
                               <NavLink
                                 to="/adminlist"
                                 exact
-                                activeStyle={{ color: "red" }}
+                                activeStyle={{ color: "white" }}
                               >
-                                > <i className="ti-user" />{" "}
+                                > {" "}
                                 <span>Manage Users</span>
                               </NavLink>
                             </a>
@@ -115,9 +115,9 @@ class DashboardLayout extends Component {
                               <NavLink
                                 to="/newcategory"
                                 exact
-                                activeStyle={{ color: "red" }}
+                                activeStyle={{ color: "white" }}
                               >
-                                > <i className="ti-plus" />{" "}
+                                > {" "}
                                 <span>Add Category</span>
                               </NavLink>
                             </a>
@@ -127,9 +127,9 @@ class DashboardLayout extends Component {
                               <NavLink
                                 to="/categorylist"
                                 exact
-                                activeStyle={{ color: "red" }}
+                                activeStyle={{ color: "white" }}
                               >
-                                > <i className="ti-list" />{" "}
+                                > {" "}
                                 <span>Category List</span>
                               </NavLink>
                             </a>
@@ -146,9 +146,9 @@ class DashboardLayout extends Component {
                             <a>
                               <NavLink
                                 to="/addproduct"
-                                activeStyle={{ color: "red" }}
+                                activeStyle={{ color: "white" }}
                               >
-                                > <i className="ti-plus" />{" "}
+                                > {" "}
                                 <span>Add Product</span>
                               </NavLink>
                             </a>
@@ -157,9 +157,9 @@ class DashboardLayout extends Component {
                             <a>
                               <NavLink
                                 to="/productlist"
-                                activeStyle={{ color: "red" }}
+                                activeStyle={{ color: "white" }}
                               >
-                                > <i className="ti-list" />{" "}
+                                > {" "}
                                 <span>Product List</span>
                               </NavLink>
                             </a>
