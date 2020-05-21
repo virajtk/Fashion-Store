@@ -8,6 +8,7 @@ import AddCategory from "./components/AddCategory";
 import CategoryList from "./components/CategoryList";
 import AddProduct from "./components/AddProduct";
 import ProductList from "./components/ProductList";
+import DashboardRegister from "../admin-components/AddAccount";
 
 class DashboardLayout extends Component {
     render() {
@@ -38,7 +39,7 @@ class DashboardLayout extends Component {
                                         <li>
                                             <a href="javascript:void(0)" aria-expanded="true"><i className=" ti-layout-grid2" /><span>User Management</span></a>
                                             <ul className="collapse">
-                                                <li><a href="/addproduct"><i className="ti-plus" /> <span>Add Store Manager</span></a></li>
+                                                <li><a href="/adminreg"><i className="ti-plus" /> <span>Add Store Manager</span></a></li>
                                                 <li><a href="/productlist"><i className="ti-user" /> <span>Manage Users</span></a></li>
                                             </ul>
                                         </li>
@@ -285,6 +286,9 @@ class DashboardLayout extends Component {
                                         <div className="card-body">
                                             <Router>
                                                 <Switch>
+                                                    <Route path="/adminreg">
+                                                        <DashboardRegister />
+                                                    </Route>
                                                     <Route path="/newcategory">
                                                         <AddCategory />
                                                     </Route>

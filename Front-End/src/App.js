@@ -16,23 +16,19 @@ import customerLayout from "./components/Customer-Dashboard-Component/customerLa
 function App() {
   return (
     < div className="App">
-        {/*<DashboardLayout />*/}
+        {/* <DashboardLayout /> */}
 
         {/* <Login/> */}
-         <MainHomeLayout />
+        {/* <MainHomeLayout /> */}
         {/* <Register/>*/}
-        {/* <AddAccount /> */}
+        <AddAccount />
         {/* <AddCategory /> */}
         {/*<DashboardLogin/>*/}
-        {/*<DashboardRegister/>*/}
+        {/* <DashboardRegister/> */}
 
         {/*<customerLayout />*/}
         {/*<DetailProductPage/>*/}
-        {/* <Login/> */}
-        
-        {/* <Register/> */}
-        {/* <AddAccount /> */}
-        {/* <AddCategory /> */}
+
         {/*<Route exact path ="/product/:productId" component={Auth(DetailProductPage, null)},*/}
 
     </div>
