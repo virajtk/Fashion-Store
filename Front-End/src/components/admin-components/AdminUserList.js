@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -9,7 +9,7 @@ class AdminUserList extends Component {
     this.state = {
       adminUsers: [],
       isLoaded: false,
-      redirect: null,
+      link: null,
     };
   }
 
@@ -24,16 +24,18 @@ class AdminUserList extends Component {
       let result = fetch(API_URL, { method: "delete" });
 
       console.log("Result: " + result);
-      toast.success("✅ Category Deleted Succesfully !", {
+      this.componentDidMount();
+      this.componentDidMount();
+      toast.success("☑️ Category Deleted Succesfully !", {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
       });
-      this.componentDidMount();
+      
     } catch (error) {
       console.log(error.message);
     }
@@ -51,8 +53,8 @@ class AdminUserList extends Component {
   }
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to={this.state.redirect} />;
+    if (this.state.link) {
+      return <Link to={this.state.link} />;
     }
     let { isLoaded, adminUsers } = this.state;
     if (!isLoaded) {
@@ -65,6 +67,7 @@ class AdminUserList extends Component {
     } else {
       return (
         <div>
+          <ToastContainer />
           <h4 className="header-title">Manage Administrator Users</h4>
           <div className="single-table">
             <div className="table-responsive">
