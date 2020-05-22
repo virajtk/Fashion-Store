@@ -5,8 +5,8 @@ class DashBoard extends Component {
   render() {
     return (
       <div>
-<<<<<<< HEAD
-          {/* sales report area start */}
+
+          {/* Dashboard card area start */}
           <div className="sales-report-area sales-style-two">
               <div className="row">
                   <div className="col-xl-3 col-ml-3 col-md-6 mt-5">
@@ -51,7 +51,7 @@ class DashBoard extends Component {
                   </div>
               </div>
           </div>
-          {/* sales report area end */}
+          {/* Dashboard card area end */}
 
           <div className="card mt-5">
               <div className="card-body">
@@ -61,18 +61,10 @@ class DashBoard extends Component {
                           format={"dddd, MMMM Mo, YYYY | hh:mm:ss A"}
                           style={{ fontSize: "3em" }}
                       />
-
                   </div>
               </div>
           </div>
 
-=======
-        <Clock
-          ticking={true}
-          format={"dddd, MMMM Mo, YYYY | hh:mm:ss A"}
-          style={{ fontSize: "3em" }}
-        />
->>>>>>> 5e4de6a6f55c0aa95d91192a3ca8421b09b02341
       </div>
     );
   }
