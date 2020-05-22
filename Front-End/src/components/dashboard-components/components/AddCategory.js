@@ -101,7 +101,7 @@ class AddCategory extends Component {
                   value={this.state.description}
                   onChange={this.onChangeHandler}
                   required
-                ></textarea>
+                />
               </div>
               <div className="form-check text-left">
                 <input
