@@ -4,7 +4,7 @@ class Checkout extends Component {
     render() {
         return (
             <section className="product-section">
-                <div className="container" >
+                <div className="container">
                     {/*style={{maxWidth: "960px"}}*/}
                     <div className="row">
                         <div className="col-md-4 order-md-2 mb-4">

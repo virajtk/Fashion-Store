@@ -9,21 +9,46 @@ class Categories extends Component {
 
         this.state = {
             itemList: [],
-            isLoaded: false
+            mainCategories : ['Woman Wear','Men Wear','Kids Wear','Bags and Purses','Footwear','Jewellery'],
+            selectedCategory: '',
+            productTypeList: []
         }
     }
 
     componentDidMount() {
-        fetch('http://localhost:3000/product/all')
+        let id=  sessionStorage.getItem("selectedCategory:");
+        fetch('http://localhost:3000/product/findByMainCategory/'+id)
             .then(res => res.json())
             .then(json =>{
-                console.log("json",json);
                 this.setState({
                     itemList: json,
-                    isLoaded: true
                 })
             });
     }
+
+    handleOnMouseOver = (category) => {
+
+        fetch('http://localhost:3000/product/findProductType/'+category)
+            .then(res => res.json())
+            .then(json =>{
+                this.setState({
+                    productTypeList: json,
+                })
+            });
+    };
+
+    handleSelectedCategory = (selectedItem) => {
+
+        fetch('http://localhost:3000/product/findBySubCategory/'+selectedItem)
+            .then(res => res.json())
+            .then(json =>{
+                this.setState({
+                    itemList: json,
+
+                })
+            });
+
+    };
 
     render() {
         return (
@@ -31,20 +56,37 @@ class Categories extends Component {
                 <div className="col-lg-4 mt-5">
                     <div className="card">
                         <div className="card-body">
-                            <h4 className="header-title">Products List</h4>
+                            <div className="filter-widget">
+                                <h2 className="fw-title">Categories</h2>
+                                <ul className="category-menu">
+                                    {this.state.mainCategories.map(category => (
+                                    <li onMouseOver={this.handleOnMouseOver.bind(this,category)}><a href="#">{category}</a>
+                                        <ul className="sub-menu">
+                                            {this.state.productTypeList.map(productTypes => (
+                                            <li onClick={this.handleSelectedCategory.bind(this,productTypes.subCategory)}><a>{productTypes.subCategory}<span></span></a></li>
+                                            ))}
+                                        </ul>
+                                    </li>
+                                    ))}
+                                </ul>
+                            </div>
 
                         </div>
                     </div>
                 </div>
-
-
                 <div className="col-lg-8 mt-5">
                     <div className="card">
                         <div className="card-body">
                             <div className="row">
                                 {this.state.itemList.map(item => (
-                                    
-                                        <Item id={item._id} productName={item.productName} price={item.price}/>
+
+                                        <Item
+                                            id={item._id}
+                                            productName={item.productName}
+                                            price={item.price}
+                                            discountedPrice={item.discountPrice}
+                                            discount={item.discount}
+                                        />
                                 ))}
 
                             </div>

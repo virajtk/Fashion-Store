@@ -73,55 +73,63 @@ class CategoryList extends Component {
           <ToastContainer/>
           {/* Same as */}
           <ToastContainer />
-          <h4 className="header-title">Manage Categories</h4>
-          <div className="single-table">
-            <div className="table-responsive">
-              <table className="table table-hover text-center">
-                <thead className="text-uppercase bg-theme">
-                  <tr className="text-white">
-                    <th scope="col">Index</th>
-                    <th scope="col">Main Category</th>
-                    <th scope="col">Sub Category</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Edit</th>
-                    <th scope="col">Delete</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {categories.map((category) => (
-                    <tr key={category._id}>
-                      <th scope="row">{categories.indexOf(category) + 1}</th>
-                      <td>{category.mainCategory}</td>
-                      <td>{category.subCategory}</td>
-                      <td>{category.description}</td>
-                      <td>
-                        <button
-                          style={{
-                            padding: 0,
-                            border: "none",
-                            background: "none",
-                          }}
-                          onClick={() => this.editAction(category)}
-                        >
-                          <i className="ti-pencil" />
-                        </button>
-                      </td>
-                      <td>
-                        <button
-                          style={{
-                            padding: 0,
-                            border: "none",
-                            background: "none",
-                          }}
-                          onClick={() => this.deleteAction(category)}
-                        >
-                          <i className="ti-trash" />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+          <div className="row">
+            <div className="col-lg-12 mt-5">
+              <div className="card">
+                <div className="card-body">
+                  <h4 className="header-title">Manage Categories</h4>
+                  <div className="single-table">
+                    <div className="table-responsive">
+                      <table className="table table-hover text-center">
+                        <thead className="text-uppercase bg-theme">
+                          <tr className="text-white">
+                            <th scope="col">Index</th>
+                            <th scope="col">Main Category</th>
+                            <th scope="col">Sub Category</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {categories.map((category) => (
+                            <tr key={category._id}>
+                              <th scope="row">{categories.indexOf(category) + 1}</th>
+                              <td>{category.mainCategory}</td>
+                              <td>{category.subCategory}</td>
+                              <td>{category.description}</td>
+                              <td>
+                                <button
+                                  style={{
+                                    padding: 0,
+                                    border: "none",
+                                    background: "none",
+                                  }}
+                                  onClick={() => this.editAction(category)}
+                                >
+                                  <i className="ti-pencil" />
+                                </button>
+                              </td>
+                              <td>
+                                <button
+                                  style={{
+                                    padding: 0,
+                                    border: "none",
+                                    background: "none",
+                                  }}
+                                  onClick={() => this.deleteAction(category)}
+                                >
+                                  <i className="ti-trash" />
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

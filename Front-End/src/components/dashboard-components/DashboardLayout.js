@@ -11,11 +11,11 @@ import AddCategory from "./components/AddCategory";
 import CategoryList from "./components/CategoryList";
 import AddProduct from "./components/AddProduct";
 import ProductList from "./components/ProductList";
-import DashboardRegister from "../admin-components/AddAccount";
 import AdminUserList from "../admin-components/AdminUserList";
 import DashBoard from "./components/DashBoard";
 import EditAdminProfile from "./components/EditAdminProfile";
 import DashboardLogin from "../admin-components/DashboardLogin";
+import AddAccount from "../admin-components/AddAccount";
 
 class DashboardLayout extends Component {
   constructor(props) {
@@ -23,6 +23,7 @@ class DashboardLayout extends Component {
     this.state = {
       isLoaded: false,
       adminUser: [],
+
       redirect: null,
     };
   }
@@ -70,9 +71,9 @@ class DashboardLayout extends Component {
         </Router>
       );
     }
+
     return (
       <div>
-        <Router>
           {/*[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]*/}
@@ -83,6 +84,7 @@ class DashboardLayout extends Component {
           {/* preloader area end */}
           {/* page container area start */}
           <div className="page-container">
+            <Router>
             {/* sidebar menu area start */}
             <div className="sidebar-menu">
               <div className="sidebar-header">
@@ -116,6 +118,7 @@ class DashboardLayout extends Component {
                         <ul className="collapse">
                           <li>
                             <a>
+
                               <NavLink
                                 to="/adminreg"
                                 exact
@@ -198,6 +201,7 @@ class DashboardLayout extends Component {
                       </li>
 
                       {/* <li><a href=""><i className="ti-gift" /> <span>Flash Deals</span></a></li> */}
+
                       {/* <li>
                         <a href="">
                           <i className="ti-home" />{" "}
@@ -471,7 +475,7 @@ class DashboardLayout extends Component {
               {/* page title area start */}
               <div className="page-title-area">
                 <div className="row align-items-center">
-                  <div className="col-sm-6">
+                  <div className="col-sm-8">
                     <div className="breadcrumbs-area clearfix">
                       <h4 className="page-title pull-left">Dashboard</h4>
                       <ul className="breadcrumbs pull-left">
@@ -479,18 +483,18 @@ class DashboardLayout extends Component {
                           <a href="/">Home</a>
                         </li>
                         <li>
-                          <span>Dashboard |</span>
-                        </li>
-                        <li>
-                          <span>
-                            {" "}
-                            | User Role : {this.state.adminUser.role}
-                          </span>
+                          <span>Dashboard </span>
                         </li>
                       </ul>
                     </div>
                   </div>
-                  <div className="col-sm-6 clearfix">
+                  <div className="col-sm-1">
+                    <div className="breadcrumbs-area clearfix">
+                      <h4 className="page-title pull-left text-uppercase">{this.state.adminUser.role}</h4>
+                    </div>
+                  </div>
+
+                  <div className="col-sm-3 clearfix">
                     <div className="user-profile pull-right">
                       <img
                         className="avatar user-thumb"
@@ -527,16 +531,12 @@ class DashboardLayout extends Component {
               </div>
               {/* page title area end */}
               <div className="main-content-inner">
-                <div className="row">
-                  <div className="col-lg-12 mt-5">
-                    <div className="card">
-                      <div className="card-body">
                         <Switch>
                           <Route path="/" exact>
                             <DashBoard />
                           </Route>
                           <Route path="/adminreg" exact>
-                            <DashboardRegister />
+                            <AddAccount />
                           </Route>
                           <Route path="/adminlist" exact>
                             <AdminUserList />
@@ -557,10 +557,6 @@ class DashboardLayout extends Component {
                             <EditAdminProfile />
                           </Route>
                         </Switch>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
             {/* main content area end */}
@@ -574,6 +570,7 @@ class DashboardLayout extends Component {
               </div>
             </footer>
             {/* footer area end*/}
+            </Router>
           </div>
           {/* page container area end */}
           {/* offset area start */}
@@ -813,7 +810,6 @@ class DashboardLayout extends Component {
             </div>
           </div>
           {/* offset area end */}
-        </Router>
       </div>
     );
   }
