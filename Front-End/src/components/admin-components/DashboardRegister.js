@@ -1,6 +1,31 @@
 import React, {Component} from 'react';
 
 class DashboardRegister extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+          fullName: "",
+          userName: "",
+          email: "",
+          contactNo: "",
+          password: "",
+          confirmPassword: "",
+        };
+      }
+    
+      onSubmitHandler = () => {
+        alert(JSON.stringify(this.state));
+      };
+    
+      onChangeHandler = (e) => {
+        const { name, value } = e.target;
+    
+        this.setState({
+          [name]: value,
+        });
+      };
+
     render() {
         return (
             <div>

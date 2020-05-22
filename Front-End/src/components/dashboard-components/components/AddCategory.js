@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class AddCategory extends Component {
   constructor(props) {
@@ -8,7 +10,7 @@ class AddCategory extends Component {
       subCategory: "",
       mainCategory: "",
       description: "",
-      redirect: null
+      redirect: null,
     };
   }
 
@@ -23,14 +25,22 @@ class AddCategory extends Component {
       let result = await fetch("http://localhost:3000/category", {
         method: "post",
         headers: {
-          "Accept": "application/json",
+          Accept: "application/json",
           "Content-type": "application/json",
         },
         body: JSON.stringify(this.state),
       });
-
+      toast.success("☑️ Category Added Susseccfully !", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       console.log("Result: " + result);
-      this.setState({ redirect: "/categorylist" });
+      // this.setState({ redirect: "/categorylist" });
     } catch (error) {
       console.log(error.message);
     }
@@ -45,11 +55,12 @@ class AddCategory extends Component {
   };
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to={this.state.redirect} />
-    }
+    // if (this.state.redirect) {
+    //   return <Redirect to={this.state.redirect} />;
+    // }
     return (
       <div>
+        <ToastContainer />
         <div>
           <h4 className="header-title">Add New Category</h4>
         </div>
@@ -66,10 +77,10 @@ class AddCategory extends Component {
                   onChange={this.onChangeHandler}
                   required
                 >
-                  <option selected="selected"> </option>
+                  <option selected="selected"></option>
                   <option value="Woman Wear">Woman Wear</option>
                   <option value="Men Wear">Men Wear</option>
-                  <option value="Children">Children</option>
+                  <option value="Kids Wear">Kids Wear</option>
                   <option value="Bags and Purses">Bags and Purses</option>
                   <option value="Footwear">Footwear</option>
                   <option value="Jewellery">Jewellery</option>
@@ -80,7 +91,7 @@ class AddCategory extends Component {
                 <input
                   type="text"
                   className="form-control style-input"
-                  placeholder="Sub Category"
+                  placeholder="Enter New Sub Category"
                   id="inputSubCategory"
                   name="subCategory"
                   value={this.state.subCategory}
@@ -96,6 +107,7 @@ class AddCategory extends Component {
                 <textarea
                   className="form-control style-input"
                   id="InputDescription"
+                  placeholder="Enter Description for Sub Category"
                   rows="3"
                   name="description"
                   value={this.state.description}
