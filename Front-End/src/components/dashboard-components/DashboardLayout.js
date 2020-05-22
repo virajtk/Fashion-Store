@@ -1,6 +1,11 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 import AddCategory from "./components/AddCategory";
 import CategoryList from "./components/CategoryList";
@@ -10,6 +15,7 @@ import DashboardRegister from "../admin-components/AddAccount";
 import AdminUserList from "../admin-components/AdminUserList";
 import DashBoard from "./components/DashBoard";
 import EditAdminProfile from "./components/EditAdminProfile";
+import DashboardLogin from "../admin-components/DashboardLogin";
 
 class DashboardLayout extends Component {
   constructor(props) {
@@ -17,11 +23,17 @@ class DashboardLayout extends Component {
     this.state = {
       isLoaded: false,
       adminUser: [],
-      link: null,
-      activeUser: "",
-      activeUserRole: "",
+
+      redirect: null,
     };
   }
+
+  logoutAction = () => {
+    this.state.activeUser = [];
+    // alert(this.state.activeUser);
+    this.setState({ redirect: "/logout" });
+
+  };
 
   componentDidMount() {
     const LogedUserID = "5ebf7f7a2e8cbedb8c6019c9";
@@ -31,13 +43,35 @@ class DashboardLayout extends Component {
         this.setState({
           isLoaded: true,
           adminUser: json,
-          activeUser: this.state.adminUser.fullName,
-          activeUserRole: this.state.adminUser.role,
         });
-        console.log(this.state.adminUser.fullName);
       });
   }
   render() {
+    if (this.state.redirect) {
+      return (
+        <Router>
+          <Redirect to={this.state.redirect} />
+          <Switch>
+            <Route path="/logout" exact>
+              <DashboardLogin />
+            </Route>
+          </Switch>
+        </Router>
+      );
+    }
+    if (!this.state.adminUser) {
+      return (
+        <Router>
+          <Redirect to="/logout" />
+          <Switch>
+            <Route path="/logout" exact>
+              <DashboardLogin />
+            </Route>
+          </Switch>
+        </Router>
+      );
+    }
+
     return (
       <div>
           {/*[if lt IE 8]>
@@ -64,12 +98,16 @@ class DashboardLayout extends Component {
                 <div className="menu-inner">
                   <nav>
                     <ul className="metismenu" id="menu">
-                      <li>
+                      <li className="">
                         <a>
-                          <Link to="/" >
+                          <NavLink
+                            to="/"
+                            exact
+                            activeStyle={{ color: "white" }}
+                          >
                             <i className="ti-dashboard" />{" "}
                             <span>Dashboard</span>
-                          </Link>
+                          </NavLink>
                         </a>
                       </li>
                       <li>
@@ -80,18 +118,25 @@ class DashboardLayout extends Component {
                         <ul className="collapse">
                           <li>
                             <a>
-                              <Link to="/adminreg">
-                                <i className="ti-plus" />{" "}
-                                <span>Add Manager</span>
-                              </Link>
+
+                              <NavLink
+                                to="/adminreg"
+                                exact
+                                activeStyle={{ color: "white" }}
+                              >
+                                > <span>Add Manager</span>
+                              </NavLink>
                             </a>
                           </li>
                           <li>
                             <a>
-                              <Link to="/adminlist">
-                                <i className="ti-user" />{" "}
-                                <span>Manage Users</span>
-                              </Link>
+                              <NavLink
+                                to="/adminlist"
+                                exact
+                                activeStyle={{ color: "white" }}
+                              >
+                                > <span>Manage Users</span>
+                              </NavLink>
                             </a>
                           </li>
                         </ul>
@@ -103,15 +148,25 @@ class DashboardLayout extends Component {
                         </a>
                         <ul className="collapse">
                           <li>
-                            <a href="/newcategory">
-                              <i className="ti-plus" />{" "}
-                              <span>Add Category</span>
+                            <a>
+                              <NavLink
+                                to="/newcategory"
+                                exact
+                                activeStyle={{ color: "white" }}
+                              >
+                                > <span>Add Category</span>
+                              </NavLink>
                             </a>
                           </li>
                           <li>
-                            <a href="/categorylist">
-                              <i className="ti-list" />{" "}
-                              <span>Category List</span>
+                            <a>
+                              <NavLink
+                                to="/categorylist"
+                                exact
+                                activeStyle={{ color: "white" }}
+                              >
+                                > <span>Category List</span>
+                              </NavLink>
                             </a>
                           </li>
                         </ul>
@@ -123,24 +178,52 @@ class DashboardLayout extends Component {
                         </a>
                         <ul className="collapse">
                           <li>
-                            <a href="/addproduct">Add Product</a>
+                            <a>
+                              <NavLink
+                                to="/addproduct"
+                                activeStyle={{ color: "white" }}
+                              >
+                                > <span>Add Product</span>
+                              </NavLink>
+                            </a>
                           </li>
                           <li>
-                            <a href="/productlist">Product List</a>
-                          </li>
-                          <li>
-                            <a href="">Manage Product</a>
+                            <a>
+                              <NavLink
+                                to="/productlist"
+                                activeStyle={{ color: "white" }}
+                              >
+                                > <span>Product List</span>
+                              </NavLink>
+                            </a>
                           </li>
                         </ul>
                       </li>
 
                       {/* <li><a href=""><i className="ti-gift" /> <span>Flash Deals</span></a></li> */}
-                      <li>
+
+                      {/* <li>
                         <a href="">
                           <i className="ti-home" />{" "}
                           <span>Store Management</span>
                         </a>
-                      </li>
+                      </li> */}
+                      {/* <li>
+                                            <a href="javascript:void(0)" aria-expanded="true"><i className="fa fa-align-left" /> <span>Multi
+                          level menu</span></a>
+                                            <ul className="collapse">
+                                                <li><a href="#">Item level (1)</a></li>
+                                                <li><a href="#">Item level (1)</a></li>
+                                                <li><a href="#" aria-expanded="true">Item level (1)</a>
+                                                    <ul className="collapse">
+                                                        <li><a href="#">Item level (2)</a></li>
+                                                        <li><a href="#">Item level (2)</a></li>
+                                                        <li><a href="#">Item level (2)</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#">Item level (1)</a></li>
+                                            </ul>
+                                        </li> */}
                     </ul>
                   </nav>
                 </div>
@@ -426,17 +509,20 @@ class DashboardLayout extends Component {
                         <i className="fa fa-angle-down" />
                       </h4>
                       <div className="dropdown-menu">
-                      {/*  <a className="dropdown-item" href="#">*/}
-                      {/*  Message*/}
-                      {/*</a>*/}
-                      {/*<a className="dropdown-item" href="#">*/}
-                      {/*  Settings*/}
-                      {/*</a>*/}
+                        {/* <a className="dropdown-item" href="#">
+                        Message
+                      </a>
+                      <a className="dropdown-item" href="#">
+                        Settings
+                      </a> */}
                         <a className="dropdown-item">
                           <Link to="/editprofile">Edit Profile</Link>
                         </a>
-                        <a className="dropdown-item">
-                          <Link to="b">Log Out</Link>
+                        <a
+                          className="dropdown-item"
+                          onClick={() => this.logoutAction()}
+                        >
+                          <Link>Log Out</Link>
                         </a>
                       </div>
                     </div>

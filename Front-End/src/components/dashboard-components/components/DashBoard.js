@@ -5,6 +5,7 @@ class DashBoard extends Component {
   render() {
     return (
       <div>
+<<<<<<< HEAD
           {/* sales report area start */}
           <div className="sales-report-area sales-style-two">
               <div className="row">
@@ -65,6 +66,13 @@ class DashBoard extends Component {
               </div>
           </div>
 
+=======
+        <Clock
+          ticking={true}
+          format={"dddd, MMMM Mo, YYYY | hh:mm:ss A"}
+          style={{ fontSize: "3em" }}
+        />
+>>>>>>> 5e4de6a6f55c0aa95d91192a3ca8421b09b02341
       </div>
     );
   }
