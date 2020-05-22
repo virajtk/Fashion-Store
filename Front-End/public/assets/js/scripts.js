@@ -197,6 +197,21 @@
         $button.parent().find('input').val(newVal);
     });
 
+    /*------------------
+		Category menu
+	--------------------*/
+    $('.category-menu > li').hover( function(e) {
+        $(this).addClass('active');
+        e.preventDefault();
+    });
+    $('.category-menu').mouseleave( function(e) {
+        $('.category-menu li').removeClass('active');
+        e.preventDefault();
+    });
+
+
+
+
     /*================================
     Fullscreen Page
     ==================================*/

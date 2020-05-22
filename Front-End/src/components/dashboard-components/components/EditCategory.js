@@ -92,7 +92,7 @@ class EditCategory extends Component {
                   name="description"
                   value={this.state.description}
                   onChange={this.onChangeHandler}
-                ></textarea>
+                />
               </div>
               <div className="form-check text-left">
                 <input
@@ -113,7 +113,7 @@ class EditCategory extends Component {
                 </button>
               </div>
             </div>
-            <div className="col-md-6"></div>
+            <div className="col-md-6"> </div>
           </div>
         </form>
       </div>

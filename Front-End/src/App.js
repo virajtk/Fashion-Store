@@ -32,6 +32,7 @@ function App() {
       {/*<DetailProductPage/>*/}
 
       {/*<Route exact path ="/product/:productId" component={Auth(DetailProductPage, null)},*/}
+
     </div>
   );
 }

@@ -17,6 +17,7 @@ class AddProduct extends Component {
             description: '',
             price: '',
             discount:'',
+            discountPrice:'',
             brand: '',
             color: '',
             productTypeList: []
@@ -60,6 +61,11 @@ class AddProduct extends Component {
 
     async postData() {
         try {
+            if(this.state.discount){
+                this.state.discountPrice = this.state.price - this.state.price * (this.state.discount/100);
+
+            }
+
             let result = await fetch('http://localhost:3000/product/addproduct', {
                 method: 'post',
                 headers: {
@@ -73,6 +79,7 @@ class AddProduct extends Component {
                     "description": this.state.description,
                     "price": this.state.price,
                     "discount": this.state.discount,
+                    "discountPrice":this.state.discountPrice,
                     "brand": this.state.brand,
                     "color": this.state.color,
                 })
@@ -87,7 +94,6 @@ class AddProduct extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        alert(JSON.stringify(this.state));
         this.postData();
 
     };
@@ -100,7 +106,7 @@ class AddProduct extends Component {
                 <div>
                     <h4 className="header-title">Add New Product</h4>
                 </div>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} autoComplete="off">
                     <div className="row">
                         <div className="col-md-8">
                             <div className="form-group">
@@ -112,12 +118,12 @@ class AddProduct extends Component {
                                     onChange={this.onChangeMainCategory}
                                 >
                                     <option selected="selected"> </option>
-                                    <option value="Woman wear">Woman wear</option>
-                                    <option value="men-wear">Men wear</option>
-                                    <option value="Children">Children</option>
+                                    <option value="Woman Wear">Women Wear</option>
+                                    <option value="Men Wear">Men Wear</option>
+                                    <option value="Kids Wear">Kids Wear</option>
                                     <option value="Bags and Purses">Bags and Purses</option>
-                                    <option value="footwear">Footwear</option>
-                                    <option value="jewellery">Jewellery</option>
+                                    <option value="Footwear">Footwear</option>
+                                    <option value="Jewellery">Jewellery</option>
                                 </select>
                             </div>
                             <div className="form-group">

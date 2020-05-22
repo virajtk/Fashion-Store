@@ -23,6 +23,7 @@ class DashboardLayout extends Component {
     this.state = {
       isLoaded: false,
       adminUser: [],
+
       redirect: null,
     };
   }
@@ -70,6 +71,7 @@ class DashboardLayout extends Component {
         </Router>
       );
     }
+
     return (
       <div>
         <Router>
@@ -116,6 +118,7 @@ class DashboardLayout extends Component {
                         <ul className="collapse">
                           <li>
                             <a>
+
                               <NavLink
                                 to="/adminreg"
                                 exact
@@ -198,6 +201,7 @@ class DashboardLayout extends Component {
                       </li>
 
                       {/* <li><a href=""><i className="ti-gift" /> <span>Flash Deals</span></a></li> */}
+
                       {/* <li>
                         <a href="">
                           <i className="ti-home" />{" "}
