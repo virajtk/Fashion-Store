@@ -12,27 +12,26 @@ import DashboardRegister from "./components/admin-components/DashboardRegister";
 
 
 import customerLayout from "./components/Customer-Dashboard-Component/customerLayout";
+import SelectedItem from "./components/main-home-components/components/SelectedItem";
 
 function App() {
   return (
     < div className="App">
-        {/*<DashboardLayout />*/}
-
-        {/* <Login/> */}
-         <MainHomeLayout />
-        {/* <Register/>*/}
-        {/* <AddAccount /> */}
-        {/* <AddCategory /> */}
+         <DashboardLayout/>
         {/*<DashboardLogin/>*/}
         {/*<DashboardRegister/>*/}
+
+        {/* <Login/> */}
+        {/* <MainHomeLayout />*/}
+        {/* <Register/>*/}
+
+
 
         {/*<customerLayout />*/}
         {/*<DetailProductPage/>*/}
         {/* <Login/> */}
         
         {/* <Register/> */}
-        {/* <AddAccount /> */}
-        {/* <AddCategory /> */}
         {/*<Route exact path ="/product/:productId" component={Auth(DetailProductPage, null)},*/}
 
     </div>
