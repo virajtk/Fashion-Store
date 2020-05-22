@@ -38,6 +38,47 @@ router.get('/findProductType/:mainCategory', async (req,res) => {
 
 });
 
+// Getting Selected Product
+router.get('/findByMainCategory/:mainCategory', async (req,res) => {
+
+    let productList = [];
+    try {
+        productList = await Product.find({
+            "mainCategory" : req.params.mainCategory
+        });
+        if ( productList == null ) {
+            return res.status(404).json({ message: 'Cannot find Product' })
+        }
+        else {
+            res.json(productList);
+        }
+    } catch (err) {
+        return res.status(500).json({ message : err.message})
+    }
+
+});
+
+
+// Getting Selected SubCategory
+router.get('/findBySubCategory/:productType', async (req,res) => {
+
+    let productDetailsList = [];
+    try {
+        productDetailsList = await Product.find({
+            "productType" : req.params.productType
+        });
+        if ( productDetailsList == null ) {
+            return res.status(404).json({ message: 'Cannot find Product' })
+        }
+        else {
+            res.json(productDetailsList);
+        }
+    } catch (err) {
+        return res.status(500).json({ message : err.message})
+    }
+
+});
+
 // Creating One
 router.post('/addproduct', async (req,res) => {
     const product = new Product({
@@ -46,6 +87,7 @@ router.post('/addproduct', async (req,res) => {
         description: req.body.description,
         price: req.body.price,
         discount: req.body.discount,
+        discountPrice: req.body.discountPrice,
         mainCategory: req.body.mainCategory,
         productType: req.body.productType,
         color: req.body.color,
@@ -58,6 +100,7 @@ router.post('/addproduct', async (req,res) => {
         res.status(400).json({ message: err.message })
     }
 })
+
 // Updating One
 router.patch('/:id', getProduct , async (req,res) => {
     if (req.body.productName != null) {
