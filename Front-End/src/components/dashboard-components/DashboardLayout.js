@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import { NavLink, Link } from "react-router-dom";
 
 import AddCategory from "./components/AddCategory";
@@ -10,6 +15,7 @@ import DashboardRegister from "../admin-components/AddAccount";
 import AdminUserList from "../admin-components/AdminUserList";
 import DashBoard from "./components/DashBoard";
 import EditAdminProfile from "./components/EditAdminProfile";
+import DashboardLogin from "../admin-components/DashboardLogin";
 
 class DashboardLayout extends Component {
   constructor(props) {
@@ -17,11 +23,16 @@ class DashboardLayout extends Component {
     this.state = {
       isLoaded: false,
       adminUser: [],
-      link: null,
-      activeUser: "",
-      activeUserRole: "",
+      redirect: null,
     };
   }
+
+  logoutAction = () => {
+    this.state.activeUser = [];
+    // alert(this.state.activeUser);
+    this.setState({ redirect: "/logout" });
+
+  };
 
   componentDidMount() {
     const LogedUserID = "5ebf7f7a2e8cbedb8c6019c9";
@@ -31,13 +42,34 @@ class DashboardLayout extends Component {
         this.setState({
           isLoaded: true,
           adminUser: json,
-          activeUser: this.state.adminUser.fullName,
-          activeUserRole: this.state.adminUser.role,
         });
-        console.log(this.state.adminUser.fullName);
       });
   }
   render() {
+    if (this.state.redirect) {
+      return (
+        <Router>
+          <Redirect to={this.state.redirect} />
+          <Switch>
+            <Route path="/logout" exact>
+              <DashboardLogin />
+            </Route>
+          </Switch>
+        </Router>
+      );
+    }
+    if (!this.state.adminUser) {
+      return (
+        <Router>
+          <Redirect to="/logout" />
+          <Switch>
+            <Route path="/logout" exact>
+              <DashboardLogin />
+            </Route>
+          </Switch>
+        </Router>
+      );
+    }
     return (
       <div>
         <Router>
@@ -66,7 +98,11 @@ class DashboardLayout extends Component {
                     <ul className="metismenu" id="menu">
                       <li className="">
                         <a>
-                          <NavLink to="/" exact activeStyle={{ color: "white" }}>
+                          <NavLink
+                            to="/"
+                            exact
+                            activeStyle={{ color: "white" }}
+                          >
                             <i className="ti-dashboard" />{" "}
                             <span>Dashboard</span>
                           </NavLink>
@@ -85,8 +121,7 @@ class DashboardLayout extends Component {
                                 exact
                                 activeStyle={{ color: "white" }}
                               >
-                                > {" "}
-                                <span>Add Manager</span>
+                                > <span>Add Manager</span>
                               </NavLink>
                             </a>
                           </li>
@@ -97,8 +132,7 @@ class DashboardLayout extends Component {
                                 exact
                                 activeStyle={{ color: "white" }}
                               >
-                                > {" "}
-                                <span>Manage Users</span>
+                                > <span>Manage Users</span>
                               </NavLink>
                             </a>
                           </li>
@@ -117,8 +151,7 @@ class DashboardLayout extends Component {
                                 exact
                                 activeStyle={{ color: "white" }}
                               >
-                                > {" "}
-                                <span>Add Category</span>
+                                > <span>Add Category</span>
                               </NavLink>
                             </a>
                           </li>
@@ -129,8 +162,7 @@ class DashboardLayout extends Component {
                                 exact
                                 activeStyle={{ color: "white" }}
                               >
-                                > {" "}
-                                <span>Category List</span>
+                                > <span>Category List</span>
                               </NavLink>
                             </a>
                           </li>
@@ -148,8 +180,7 @@ class DashboardLayout extends Component {
                                 to="/addproduct"
                                 activeStyle={{ color: "white" }}
                               >
-                                > {" "}
-                                <span>Add Product</span>
+                                > <span>Add Product</span>
                               </NavLink>
                             </a>
                           </li>
@@ -159,8 +190,7 @@ class DashboardLayout extends Component {
                                 to="/productlist"
                                 activeStyle={{ color: "white" }}
                               >
-                                > {" "}
-                                <span>Product List</span>
+                                > <span>Product List</span>
                               </NavLink>
                             </a>
                           </li>
@@ -484,8 +514,11 @@ class DashboardLayout extends Component {
                         <a className="dropdown-item">
                           <Link to="/editprofile">Edit Profile</Link>
                         </a>
-                        <a className="dropdown-item">
-                          <Link to="b">Log Out</Link>
+                        <a
+                          className="dropdown-item"
+                          onClick={() => this.logoutAction()}
+                        >
+                          <Link>Log Out</Link>
                         </a>
                       </div>
                     </div>
