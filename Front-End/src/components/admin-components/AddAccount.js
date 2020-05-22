@@ -64,7 +64,7 @@ class AddAccount extends Component {
 
         {/* Add Account area start */}
         <div className="login-area register-bg">
-          <div className="container-fluid p-0">
+          <div className="container p-0">
             <div className="row no-gutters">
               <div className="col-xl-4 offset-xl-8 col-lg-6 offset-lg-6">
                 <div className="login-box-s2 ptb--100">
