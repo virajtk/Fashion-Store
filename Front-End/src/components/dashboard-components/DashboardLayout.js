@@ -40,7 +40,6 @@ class DashboardLayout extends Component {
   render() {
     return (
       <div>
-        <Router>
           {/*[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]*/}
@@ -51,6 +50,7 @@ class DashboardLayout extends Component {
           {/* preloader area end */}
           {/* page container area start */}
           <div className="page-container">
+            <Router>
             {/* sidebar menu area start */}
             <div className="sidebar-menu">
               <div className="sidebar-header">
@@ -445,14 +445,15 @@ class DashboardLayout extends Component {
               </div>
               {/* page title area end */}
               <div className="main-content-inner">
+                <Route path="/" exact>
+                  <DashBoard />
+                </Route>
                 <div className="row">
                   <div className="col-lg-12 mt-5">
                     <div className="card">
                       <div className="card-body">
                         <Switch>
-                          <Route path="/" exact>
-                            <DashBoard />
-                          </Route>
+
                           <Route path="/adminreg" exact>
                             <DashboardRegister />
                           </Route>
@@ -492,6 +493,7 @@ class DashboardLayout extends Component {
               </div>
             </footer>
             {/* footer area end*/}
+            </Router>
           </div>
           {/* page container area end */}
           {/* offset area start */}
@@ -731,7 +733,6 @@ class DashboardLayout extends Component {
             </div>
           </div>
           {/* offset area end */}
-        </Router>
       </div>
     );
   }
