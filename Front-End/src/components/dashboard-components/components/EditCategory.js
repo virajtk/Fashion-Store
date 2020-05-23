@@ -4,29 +4,49 @@ class EditCategory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      subCategory: "",
-      mainCategory: "",
-      description: "",
+      category: [],
+      subCategory: null,
+      mainCategory: null,
+      description: null,
+      redirect: null,
     };
   }
 
   onSubmitHandler = (e) => {
     e.preventDefault();
-    alert(JSON.stringify(this.state));
+    // alert(JSON.stringify(this.state));
     this.postData();
   };
+
+  componentDidMount() {
+    let id = sessionStorage.getItem("selectedCategory:");
+    fetch("http://localhost:3000/category/" + id)
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          category: json,
+          subCategory: json.subCategory,
+          mainCategory: json.mainCategory,
+          description: json.description,
+        });
+      });
+  }
 
   async postData() {
     try {
       let result = await fetch("http://localhost:3000/category", {
+        mode: 'cors',
         method: "patch",
         headers: {
           "Accept": "application/json",
           "Content-type": "application/json",
         },
-        body: JSON.stringify(this.state),
+        body: JSON.stringify({
+          "subCategory": this.state.subCategory,
+          "mainCategory": this.state.mainCategory,
+          "description": this.state.description,
+        }),
       });
-
       console.log("Result: " + result);
     } catch (error) {
       console.log(error.message);
@@ -62,18 +82,23 @@ class EditCategory extends Component {
                           name="mainCategory"
                           value={this.state.mainCategory}
                           onChange={this.onChangeHandler}
+                          required
                         >
                           <option selected="selected"> </option>
                           <option value="Woman Wear">Woman Wear</option>
                           <option value="Men Wear">Men Wear</option>
                           <option value="Children">Children</option>
-                          <option value="Bags and Purses">Bags and Purses</option>
+                          <option value="Bags and Purses">
+                            Bags and Purses
+                          </option>
                           <option value="Footwear">Footwear</option>
                           <option value="Jewellery">Jewellery</option>
                         </select>
                       </div>
                       <div className="form-group">
-                        <label htmlFor="exampleInputEmail1">Sub Category Name</label>
+                        <label htmlFor="exampleInputEmail1">
+                          Sub Category Name
+                        </label>
                         <input
                           type="text"
                           className="form-control style-input"
@@ -82,13 +107,16 @@ class EditCategory extends Component {
                           name="subCategory"
                           value={this.state.subCategory}
                           onChange={this.onChangeHandler}
+                          required
                         />
                         <small id="emailHelp" className="form-text text-muted">
                           This category should be related to the main category.
                         </small>
                       </div>
                       <div className="form-group">
-                        <label htmlFor="exampleFormControlTextarea1">Description</label>
+                        <label htmlFor="exampleFormControlTextarea1">
+                          Description
+                        </label>
                         <textarea
                           className="form-control style-input"
                           id="InputDescription"
@@ -96,6 +124,7 @@ class EditCategory extends Component {
                           name="description"
                           value={this.state.description}
                           onChange={this.onChangeHandler}
+                          required
                         />
                       </div>
                       <div className="form-check text-left">
@@ -103,8 +132,12 @@ class EditCategory extends Component {
                           type="checkbox"
                           className="form-check-input"
                           id="exampleCheck1"
+                          required
                         />
-                        <label className="form-check-label" htmlFor="exampleCheck1">
+                        <label
+                          className="form-check-label"
+                          htmlFor="exampleCheck1"
+                        >
                           Confirmation
                         </label>
                       </div>

@@ -40,7 +40,7 @@ class AddCategory extends Component {
         progress: undefined,
       });
       console.log("Result: " + result);
-      // this.setState({ redirect: "/categorylist" });
+      this.setState({ redirect: "/categorylist" });
     } catch (error) {
       console.log(error.message);
     }
@@ -55,9 +55,9 @@ class AddCategory extends Component {
   };
 
   render() {
-    // if (this.state.redirect) {
-    //   return <Redirect to={this.state.redirect} />;
-    // }
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />;
+    }
     return (
       <div>
         <ToastContainer />
