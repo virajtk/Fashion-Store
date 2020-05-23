@@ -3,6 +3,7 @@ import Categories from "./components/Categories";
 import SelectedItem from "./components/SelectedItem";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Checkout from "./components/Checkout";
+import Wishlist from "./components/Wishlist";
 
 
 class MainHomeLayout extends Component {
@@ -268,6 +269,9 @@ class MainHomeLayout extends Component {
                                             </Route>
                                             <Route path="/checkout">
                                                 <Checkout />
+                                            </Route>
+                                            <Route path="/wishlist">
+                                                <Wishlist />
                                             </Route>
                                         </Switch>
                                     </Router>
