@@ -22,10 +22,11 @@ router.post('/', async (req,res) => {
     const users = new User({
         fullName: req.body.fullName,
         userName: req.body.userName,
-        password: req.body.password,
-        role: req.body.role,
         email: req.body.email,
-        contactNo: req.body.contactNo
+        role: req.body.role,
+        contactNo: req.body.contactNo,
+        password: req.body.password,
+        confirmPassword: req.body.confirmPassword
     })
 
     try{

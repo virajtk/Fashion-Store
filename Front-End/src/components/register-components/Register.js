@@ -27,7 +27,7 @@ class Register extends Component {
 
     async postData(){
         try {
-            let result = await fetch("http://localhost:3000/user", {
+            let result = await fetch("http://localhost:5000/user", {
                 method: "post",
                 headers: {
                     "Accept" : "application/json",
@@ -110,16 +110,7 @@ class Register extends Component {
                                                 <i className="ti-face-smile" />
                                                 <div className="text-danger" />
                                             </div>
-                                            <label className="form-gp"> </label>
-                                            <div className="form-gp">
-                                                <select className="custom-select style-input select-style">
-                                                    <option selected="selected"> </option>
-                                                    <option value="Customer">As Customer</option>
-                                                    <option value="Admin">As Admin</option>
-                                                    <option value="Manager">As Manager</option>
-                                                </select>
-                                                <div className="text-danger" />
-                                            </div>
+
                                             <div className="form-gp">
                                                 <label htmlFor="exampleInputContactNo1">Contact No</label>
                                                 <input type="number" id="exampleInputContactNo1" />

@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    password: {
+    email: {
         type: String,
         required: true
     },
@@ -18,14 +18,18 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    email: {
+    contactNo: {
         type: String,
         required: true
     },
-    contactNo: {
+    password: {
         type: String
     },
-    registedDate: {
+    confirmPassword: {
+        type: String,
+        required: true
+    },
+    registeredDate: {
         type: Date,
         required: true,
         default: Date.now

@@ -10,7 +10,7 @@ import AddCategory from './components/dashboard-components/components/AddCategor
 function App() {
   return (
     < div className="App">
-        <DashboardLayout />
+        <Register />
         {/* <Login/> */}
         {/* <MainHomeLayout /> */}
         {/* <Register/> */}
