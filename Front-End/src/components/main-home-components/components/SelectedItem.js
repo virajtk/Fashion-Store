@@ -12,6 +12,10 @@ class SelectedItem extends Component {
 
     }
 
+    showNowAction = (id) => {
+        // window.sessionStorage.setItem("selectedProduct:",id);
+    }
+
     componentDidMount() {
         let id=  sessionStorage.getItem("productID:");
         fetch('http://localhost:3000/product/'+id)
@@ -88,7 +92,7 @@ class SelectedItem extends Component {
                                     <p>Quantity</p>
                                     <div className="pro-qty"><input type="text" defaultValue={1}/></div>
                                 </div>
-                                <a href="#" className="site-btn">SHOP NOW</a>
+                                <a href="/checkout" className="site-btn" onClick={this.showNowAction.bind(this,selectedProduct._id)}>SHOP NOW</a>
                                 <div id="accordion" className="accordion-area">
                                     <div className="panel">
                                         <div className="panel-header" id="headingOne">

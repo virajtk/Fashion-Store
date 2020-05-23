@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Categories from "./components/Categories";
 import SelectedItem from "./components/SelectedItem";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import Checkout from "./components/Checkout";
 
 
 class MainHomeLayout extends Component {
@@ -264,6 +265,9 @@ class MainHomeLayout extends Component {
                                             </Route>
                                             <Route path="/selectedItem">
                                                 <SelectedItem />
+                                            </Route>
+                                            <Route path="/checkout">
+                                                <Checkout />
                                             </Route>
                                         </Switch>
                                     </Router>

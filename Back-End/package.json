@@ -1,10 +1,11 @@
 {
   "name": "rest-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "npm init\r npm i express mongoose\r npm i --save-dev dotenv nodemon",
   "main": "index.js",
   "scripts": {
-    "devStart": "nodemon server.js"
+    "devStart": "nodemon server.js",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
