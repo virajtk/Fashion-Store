@@ -22,9 +22,8 @@ class CategoryList extends Component {
     try {
       let result = fetch(API_URL, { method: "delete" });
       console.log("Result: " + result);
-      this.componentDidMount();
-      this.componentDidMount();
-      toast.success("☑️ Category Deleted Succesfully !", {
+      
+      toast.success("✔️ Category Deleted Succesfully !", {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -33,6 +32,10 @@ class CategoryList extends Component {
         draggable: true,
         progress: undefined,
       });
+
+      setTimeout(function() { //Start the timer
+        this.componentDidMount(); //After 1 second
+      }.bind(this), 1000)
     } catch (error) {
       console.log(error.message);
     }

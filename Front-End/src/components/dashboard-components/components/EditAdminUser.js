@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class EditAdminUser extends Component {
   constructor(props) {
@@ -24,20 +26,52 @@ class EditAdminUser extends Component {
 
   async postData() {
     try {
-      let result = await fetch(
-        "http://localhost:3000/adminUser/" + this.state.adminUser._id,
-        {
-          method: "patch",
+      let id = sessionStorage.getItem("selectedUserID:");
+      let result;
+      if(this.state.newPassword){
+         result = await fetch("http://localhost:3000/adminUser/" + id,{
+          method: "put",
           headers: {
             "Accept": "application/json",
             "Content-type": "application/json",
           },
-          body: JSON.stringify(this.state),
-        }
-      );
-
+          body: JSON.stringify({
+            "fullName": this.state.fullName,
+            "email": this.state.email,
+            "contactNo": this.state.contactNo,
+            "password": this.state.newPassword,
+          }),
+        });
+      }
+      else{
+        result = await fetch("http://localhost:3000/adminUser/" + id,{
+          method: "put",
+          headers: {
+            "Accept": "application/json",
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            "fullName": this.state.fullName,
+            "email": this.state.email,
+            "contactNo": this.state.contactNo,
+          }),
+        });
+      }
+      
       console.log("Result: " + result);
-      // this.setState({ redirect: "/adminlist" });
+      toast.success("✔️ User Details Updated Susseccfully !", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
+      setTimeout(function() { //Start the timer
+        this.setState({redirect: "/adminlist"}) //After 3 second, set redirect to true
+      }.bind(this), 3000)
     } catch (error) {
       console.log(error.message);
     }
@@ -73,12 +107,13 @@ class EditAdminUser extends Component {
     }
     return (
       <div>
+        <ToastContainer/>
         <div className="row">
           <div className="col-lg-12 mt-5">
             <div className="card">
               <div className="card-body">
                 <div>
-                  <h4 className="header-title">Edit Profile</h4>
+                  <h4 className="header-title">Edit User Details</h4>
                 </div>
                 <form onSubmit={this.onSubmitHandler} autoComplete="off">
                   <div className="row">
@@ -135,8 +170,8 @@ class EditAdminUser extends Component {
                           className="form-control style-input"
                           placeholder="Contact Number"
                           id="inputContactNo"
-                          name="password"
-                          value={this.state.password}
+                          name="contactNo"
+                          value={this.state.contactNo}
                           onChange={this.onChangeHandler}
                         />
                       </div>

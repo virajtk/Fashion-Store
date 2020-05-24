@@ -14,7 +14,7 @@ class AdminUserList extends Component {
   }
 
   editAction(adminUser) {
-    alert("Edit = " + adminUser._id);
+    // alert("Edit = " + adminUser._id);
     window.sessionStorage.setItem("selectedUserID:", adminUser._id);
   }
 
@@ -25,9 +25,7 @@ class AdminUserList extends Component {
       let result = fetch(API_URL, { method: "delete" });
 
       console.log("Result: " + result);
-      this.componentDidMount();
-      this.componentDidMount();
-      toast.success("☑️ Category Deleted Succesfully !", {
+      toast.success("✔️ Account Deleted Succesfully !", {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -36,6 +34,11 @@ class AdminUserList extends Component {
         draggable: true,
         progress: undefined,
       });
+
+      setTimeout(function() { //Start the timer
+        this.componentDidMount(); //After 1 second
+      }.bind(this), 1000)
+
     } catch (error) {
       console.log(error.message);
     }

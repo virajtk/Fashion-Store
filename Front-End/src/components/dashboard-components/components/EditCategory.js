@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Redirect } from "react-router-dom";
 
 class EditCategory extends Component {
   constructor(props) {
@@ -34,9 +37,9 @@ class EditCategory extends Component {
 
   async postData() {
     try {
-      let result = await fetch("http://localhost:3000/category", {
-        mode: 'cors',
-        method: "patch",
+      let id = sessionStorage.getItem("selectedCategory:");
+      let result = await fetch("http://localhost:3000/category/"+ id , {
+        method: "put",
         headers: {
           "Accept": "application/json",
           "Content-type": "application/json",
@@ -48,6 +51,19 @@ class EditCategory extends Component {
         }),
       });
       console.log("Result: " + result);
+      toast.success("✔️ Category Updated Susseccfully !", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
+      setTimeout(function() { //Start the timer
+        this.setState({redirect: "/categorylist"}) //After 3 second, set redirect to true
+      }.bind(this), 3000)
     } catch (error) {
       console.log(error.message);
     }
@@ -62,8 +78,12 @@ class EditCategory extends Component {
   };
 
   render() {
+    if(this.state.redirect){
+      return <Redirect to={this.state.redirect} />;
+    }
     return (
       <div>
+        <ToastContainer />
         <div className="row">
           <div className="col-lg-12 mt-5">
             <div className="card">
