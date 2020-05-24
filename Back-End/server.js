@@ -59,9 +59,9 @@ require("./config/passport")(passport);
 const userRouter = require('./routes/api/users')
 app.use('/api/users', users)
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Server up and running on port ${port} !`));
-//app.listen(3000, () => {
-  //  console.log('Server Started');
+//const port = process.env.PORT || 3000;
+//app.listen(port, () => console.log(`Server up and running on port ${port} !`));
+app.listen(3000, () => {
+  console.log('Server Started');
 
-//});
+});

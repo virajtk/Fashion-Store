@@ -19,7 +19,7 @@ import AdminUserList from "./components/admin-components/AdminUserList";
 
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
-import EditUserProfile from "./components/Customer-Dashboard-Component/EditUserProfile";
+//import EditUserProfile from "./components/Customer-Dashboard-Component/EditUserProfile";
 function App() {
   return (
 
@@ -33,7 +33,7 @@ function App() {
                 </Switch>
         {/* <Login/> */}
 
-        {<EditUserProfile/> }
+        {<AdminUserList/> }
         {/* <AddAccount /> */}
         {/* <AddCategory /> */}
 
