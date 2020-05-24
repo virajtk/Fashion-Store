@@ -14,10 +14,19 @@ import Checkout from "./components/main-home-components/components/Checkout";
 import Wishlist from "./components/main-home-components/components/Wishlist";
 function App() {
   return (
-    <div className="App">
+
+    < div className="App">
+        
+        {/* <Login/> */}
+        {/* <MainHomeLayout /> */}
+        {/* <Register/> */}
+        {/* <AddAccount /> */}
+        {/* <AddCategory /> */}
+   
       {/*<DashboardLayout />*/}
       {/*<SelectedItem />*/}
       {/*<Checkout />*/}
+
 
       {/* <Login/> */}
        <MainHomeLayout />

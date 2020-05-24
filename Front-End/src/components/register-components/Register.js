@@ -1,7 +1,58 @@
 import React, {Component} from 'react';
+import { Redirect } from "react-router-dom";
 
 class Register extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            fullName: "",
+            userName: "",
+            email: "",
+            role: "",
+            contactNo: "",
+            password: "",
+            confirmPassword: "",
+            redirect: null,
+        };
+
+    }
+
+    onSubmitHandler = (e) => {
+        e.preventDefault();
+        //alert(JSON.stringify(this.state));
+        this.postData();
+    };
+
+
+    async postData(){
+        try {
+            let result = await fetch("http://localhost:3000/user", {
+                method: "post",
+                headers: {
+                    "Accept" : "application/json",
+                    "content-type": "application/json",
+                },
+                body: JSON.stringify(this.state),
+            });
+            console.log("Result: " + result);
+            //this.setState({redirect: "/AddAccount"});
+            }catch(error){
+            console.log(error.message);
+        }
+        }
+
+    onChangeHandler = (e) => {
+        const { name, value} = e.target;
+
+        this.setState({
+            [name]: value,
+        });
+    };
     render() {
+        if(this.state.redirect){
+            return <Redirect to = {this.state.redirect} />
+        }
         return (
             <div>
                 {/*[if lt IE 8]>
@@ -18,7 +69,8 @@ class Register extends Component {
                         <div className="row no-gutters">
                             <div className="col-xl-4 offset-xl-8 col-lg-6 offset-lg-6">
                                 <div className="login-box-s2 ptb--100">
-                                    <form>
+                                    <form onSubmit={this.onSubmitHandler} autoComplete="off">
+
                                         <div className="login-form-head">
                                             <h4>Sign up</h4>
                                             <p>Hello there, Sign up and Join with Us</p>
@@ -42,6 +94,25 @@ class Register extends Component {
                                                 <i className="ti-email" />
                                                 <div className="text-danger" />
                                             </div>
+
+
+                                            <label className="form-gp"> </label>
+                                            <div className="form-gp">
+                                                <select className="custom-select style-input select-style">
+                                                    <option selected="selected"> </option>
+                                                    <option value="Customer">As Customer</option>
+                                                    <option value="Admin">As Admin</option>
+                                                    <option value="Manager">As Manager</option>
+                                                </select>
+                                                <div className="text-danger" />
+                                            </div>
+                                            <div className="form-gp">
+                                                <label htmlFor="exampleInputRole1">Role</label>
+                                                <i className="ti-face-smile" />
+                                                <div className="text-danger" />
+                                            </div>
+
+
                                             <div className="form-gp">
                                                 <label htmlFor="exampleInputContactNo1">Contact No</label>
                                                 <input type="text" id="exampleInputContactNo1" />
