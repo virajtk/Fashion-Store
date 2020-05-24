@@ -28,7 +28,7 @@ class Item extends Component {
                             <img src={Product} alt="product" />
                             <div className="pi-links">
                                 <a href="" className="add-card"><i className="ti-bag"/><span>ADD TO CART</span></a>
-                                <a href="#" className="wishlist-btn"><i className="ti-heart"/></a>
+                                <a href="/wishlist" className="wishlist-btn"><i className="ti-heart"/></a>
                             </div>
                         </div>
                         <div className="pi-text">

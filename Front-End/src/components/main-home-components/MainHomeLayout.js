@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import Categories from "./components/Categories";
 import SelectedItem from "./components/SelectedItem";
+import Checkout from "./components/Checkout";
+import Wishlist from "./components/Wishlist";
 import DashHome from "./components/DashHome";
 import {BrowserRouter as Router, Route, Switch, NavLink} from "react-router-dom";
+
 
 
 class MainHomeLayout extends Component {
@@ -270,7 +273,12 @@ class MainHomeLayout extends Component {
                                             <Route path="/selectedItem" exact>
                                                 <SelectedItem />
                                             </Route>
-                                            
+                                            <Route path="/checkout">
+                                                <Checkout />
+                                            </Route>
+                                            <Route path="/wishlist">
+                                                <Wishlist />
+                                            </Route>
                                         </Switch>
                                     
 
