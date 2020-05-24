@@ -16,6 +16,7 @@ class CategoryList extends Component {
     window.sessionStorage.setItem("selectedCategory:", category._id);
   };
 
+
   deleteAction = (category) => {
     const API_URL = "http://localhost:3000/category/" + category._id;
 
