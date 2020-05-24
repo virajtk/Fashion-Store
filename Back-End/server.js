@@ -41,6 +41,10 @@ app.use("/category", productCategoryRouter);
 const productRouter = require("./routes/product");
 app.use("/product", productRouter);
 
+// adminLogin
+const adminLoginRouter = require("./routes/adminLogin");
+app.use("/adminlogin", adminLoginRouter );
+
 app.listen(3000, () => {
   console.log("Server Started");
 });

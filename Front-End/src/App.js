@@ -15,12 +15,12 @@ import Wishlist from "./components/main-home-components/components/Wishlist";
 function App() {
   return (
     <div className="App">
-      {/*<DashboardLayout />*/}
+      <DashboardLayout />
       {/*<SelectedItem />*/}
       {/*<Checkout />*/}
 
       {/* <Login/> */}
-       <MainHomeLayout />
+       {/* <MainHomeLayout /> */}
       {/* <Wishlist />*/}
       {/* <MainHomeLayout /> */}
       {/* <Register/>*/}
