@@ -47,6 +47,10 @@ const userRouter = require('./routes/users')
 app.use('/user', userRouter)
 
 
+// adminLogin
+const adminLoginRouter = require("./routes/adminLogin");
+app.use("/adminlogin", adminLoginRouter );
+
 app.listen(3000, () => {
     console.log('Server Started');
 
