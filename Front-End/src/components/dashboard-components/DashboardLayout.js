@@ -29,8 +29,8 @@ class DashboardLayout extends Component {
       adminUser: [],
       redirect: null,
       login: false,
-      renderAdmin: false,
-      renderStoreManager: false,
+      hiddenAdmin: true,
+      hiddenStoreManager: true,
     };
   }
 
@@ -58,6 +58,16 @@ class DashboardLayout extends Component {
       this.setState({
         login: true,
       });
+      if(active.userrole.localeCompare('Admin')==0){
+        this.setState({
+          hiddenAdmin: false,
+        })
+      }
+      else{
+        this.setState({
+          hiddenStoreManager: false,
+        })
+      }
 
       const LogedUserID = active.userid;
     fetch("http://localhost:3000/adminUser/" + LogedUserID)
@@ -69,7 +79,7 @@ class DashboardLayout extends Component {
         });
         window.sessionStorage.setItem("activeUserID:", this.state.adminUser._id);
       });
-      
+
     }
     else{
       
@@ -147,7 +157,7 @@ class DashboardLayout extends Component {
                           </NavLink>
                         </a>
                       </li>
-                      <li>
+                      <li hidden={this.state.hiddenAdmin}>
                         <a href="javascript:void(0)" aria-expanded="true">
                           <i className=" ti-layout-grid2" />
                           <span>User Management</span>
@@ -177,8 +187,8 @@ class DashboardLayout extends Component {
                           </li>
                         </ul>
                       </li>
-                      <li>
-                        <a href="javascript:void(0)" aria-expanded="true">
+                      <li hidden={this.state.hiddenAdmin}>
+                        <a href="javascript:void(0)" aria-expanded="true" >
                           <i className="ti-briefcase" />
                           <span>Category Management</span>
                         </a>
@@ -207,8 +217,8 @@ class DashboardLayout extends Component {
                           </li>
                         </ul>
                       </li>
-                      <li>
-                        <a href="javascript:void(0)" aria-expanded="true">
+                      <li hidden={this.state.hiddenStoreManager}>
+                        <a href="javascript:void(0)" aria-expanded="true" render={this.state.renderStoreManager}>
                           <i className=" ti-layout-grid2" />
                           <span>Product Management</span>
                         </a>

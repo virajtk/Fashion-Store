@@ -136,8 +136,8 @@ class DashboardLogin extends Component {
     if (this.state.login) {
       return (
         <div>
-          <Redirect to="/home"/>
-          <a href="/home" onClick={this.reload()}> </a>
+          <Redirect to="/"/>
+          <a href="http://localhost:3001/" onClick={this.reload()}> </a>
         </div>
         )
     }
