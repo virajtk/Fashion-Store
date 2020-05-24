@@ -16,6 +16,8 @@ import DashBoard from "./components/DashBoard";
 import EditAdminProfile from "./components/EditAdminProfile";
 import DashboardLogin from "../admin-components/DashboardLogin";
 import AddAccount from "../admin-components/AddAccount";
+import EditCategory from "./components/EditCategory";
+import EditAdminUser from "./components/EditAdminUser";
 
 class DashboardLayout extends Component {
   constructor(props) {
@@ -23,7 +25,6 @@ class DashboardLayout extends Component {
     this.state = {
       isLoaded: false,
       adminUser: [],
-
       redirect: null,
     };
   }
@@ -32,11 +33,10 @@ class DashboardLayout extends Component {
     this.state.activeUser = [];
     // alert(this.state.activeUser);
     this.setState({ redirect: "/logout" });
-
   };
 
   componentDidMount() {
-    const LogedUserID = "5ebf7f7a2e8cbedb8c6019c9";
+    const LogedUserID = "5ec9af249220cf31680c2bb3";
     fetch("http://localhost:3000/adminUser/" + LogedUserID)
       .then((res) => res.json())
       .then((json) => {
@@ -44,6 +44,7 @@ class DashboardLayout extends Component {
           isLoaded: true,
           adminUser: json,
         });
+        window.sessionStorage.setItem("activeUserID:", this.state.adminUser._id);
       });
   }
   render() {
@@ -74,17 +75,17 @@ class DashboardLayout extends Component {
 
     return (
       <div>
-          {/*[if lt IE 8]>
+        {/*[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]*/}
-          {/* preloader area start */}
-          <div id="preloader">
-            <div className="loader" />
-          </div>
-          {/* preloader area end */}
-          {/* page container area start */}
-          <div className="page-container">
-            <Router>
+        {/* preloader area start */}
+        <div id="preloader">
+          <div className="loader" />
+        </div>
+        {/* preloader area end */}
+        {/* page container area start */}
+        <div className="page-container">
+          <Router>
             {/* sidebar menu area start */}
             <div className="sidebar-menu">
               <div className="sidebar-header">
@@ -118,7 +119,6 @@ class DashboardLayout extends Component {
                         <ul className="collapse">
                           <li>
                             <a>
-
                               <NavLink
                                 to="/adminreg"
                                 exact
@@ -490,7 +490,9 @@ class DashboardLayout extends Component {
                   </div>
                   <div className="col-sm-1">
                     <div className="breadcrumbs-area clearfix">
-                      <h4 className="page-title pull-left text-uppercase">{this.state.adminUser.role}</h4>
+                      <h4 className="page-title pull-left text-uppercase">
+                        {this.state.adminUser.role}
+                      </h4>
                     </div>
                   </div>
 
@@ -505,7 +507,7 @@ class DashboardLayout extends Component {
                         className="user-name dropdown-toggle"
                         data-toggle="dropdown"
                       >
-                        {this.state.adminUser.fullName}{" "}
+                        {this.state.adminUser.userName}{" "}
                         <i className="fa fa-angle-down" />
                       </h4>
                       <div className="dropdown-menu">
@@ -531,32 +533,38 @@ class DashboardLayout extends Component {
               </div>
               {/* page title area end */}
               <div className="main-content-inner">
-                        <Switch>
-                          <Route path="/" exact>
-                            <DashBoard />
-                          </Route>
-                          <Route path="/adminreg" exact>
-                            <AddAccount />
-                          </Route>
-                          <Route path="/adminlist" exact>
-                            <AdminUserList />
-                          </Route>
-                          <Route path="/newcategory" exact>
-                            <AddCategory />
-                          </Route>
-                          <Route path="/categorylist" exact>
-                            <CategoryList />
-                          </Route>
-                          <Route path="/addproduct" exact>
-                            <AddProduct />
-                          </Route>
-                          <Route path="/productlist" exact>
-                            <ProductList />
-                          </Route>
-                          <Route path="/editprofile" exact>
-                            <EditAdminProfile />
-                          </Route>
-                        </Switch>
+                <Switch>
+                  <Route path="/" exact>
+                    <DashBoard />
+                  </Route>
+                  <Route path="/adminreg" exact>
+                    <AddAccount />
+                  </Route>
+                  <Route path="/adminlist" exact>
+                    <AdminUserList />
+                  </Route>
+                  <Route path="/newcategory" exact>
+                    <AddCategory />
+                  </Route>
+                  <Route path="/categorylist" exact>
+                    <CategoryList />
+                  </Route>
+                  <Route path="/addproduct" exact>
+                    <AddProduct />
+                  </Route>
+                  <Route path="/productlist" exact>
+                    <ProductList />
+                  </Route>
+                  <Route path="/editprofile" exact>
+                    <EditAdminProfile />
+                  </Route>
+                  <Route path="/editadminuser" exact>
+                    <EditAdminUser />
+                  </Route>
+                  <Route path="/editcategory" exact>
+                    <EditCategory />
+                  </Route>
+                </Switch>
               </div>
             </div>
             {/* main content area end */}
@@ -570,246 +578,244 @@ class DashboardLayout extends Component {
               </div>
             </footer>
             {/* footer area end*/}
-            </Router>
+          </Router>
+        </div>
+        {/* page container area end */}
+        {/* offset area start */}
+        <div className="offset-area">
+          <div className="offset-close">
+            <i className="ti-close" />
           </div>
-          {/* page container area end */}
-          {/* offset area start */}
-          <div className="offset-area">
-            <div className="offset-close">
-              <i className="ti-close" />
-            </div>
-            <ul className="nav offset-menu-tab">
-              <li>
-                <a className="active" data-toggle="tab" href="#activity">
-                  Activity
-                </a>
-              </li>
-              <li>
-                <a data-toggle="tab" href="#settings">
-                  Settings
-                </a>
-              </li>
-            </ul>
-            <div className="offset-content tab-content">
-              <div id="activity" className="tab-pane fade in show active">
-                <div className="recent-activity">
-                  <div className="timeline-task">
-                    <div className="icon bg1">
-                      <i className="fa fa-envelope" />
-                    </div>
-                    <div className="tm-title">
-                      <h4>Rashed sent you an email</h4>
-                      <span className="time">
-                        <i className="ti-time" />
-                        09:35
-                      </span>
-                    </div>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Esse distinctio itaque at.
-                    </p>
+          <ul className="nav offset-menu-tab">
+            <li>
+              <a className="active" data-toggle="tab" href="#activity">
+                Activity
+              </a>
+            </li>
+            <li>
+              <a data-toggle="tab" href="#settings">
+                Settings
+              </a>
+            </li>
+          </ul>
+          <div className="offset-content tab-content">
+            <div id="activity" className="tab-pane fade in show active">
+              <div className="recent-activity">
+                <div className="timeline-task">
+                  <div className="icon bg1">
+                    <i className="fa fa-envelope" />
                   </div>
-                  <div className="timeline-task">
-                    <div className="icon bg2">
-                      <i className="fa fa-check" />
-                    </div>
-                    <div className="tm-title">
-                      <h4>Added</h4>
-                      <span className="time">
-                        <i className="ti-time" />7 Minutes Ago
-                      </span>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
+                  <div className="tm-title">
+                    <h4>Rashed sent you an email</h4>
+                    <span className="time">
+                      <i className="ti-time" />
+                      09:35
+                    </span>
                   </div>
-                  <div className="timeline-task">
-                    <div className="icon bg2">
-                      <i className="fa fa-exclamation-triangle" />
-                    </div>
-                    <div className="tm-title">
-                      <h4>You missed you Password!</h4>
-                      <span className="time">
-                        <i className="ti-time" />
-                        09:20 Am
-                      </span>
-                    </div>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Esse distinctio itaque at.
+                  </p>
+                </div>
+                <div className="timeline-task">
+                  <div className="icon bg2">
+                    <i className="fa fa-check" />
                   </div>
-                  <div className="timeline-task">
-                    <div className="icon bg3">
-                      <i className="fa fa-bomb" />
-                    </div>
-                    <div className="tm-title">
-                      <h4>Member waiting for you Attention</h4>
-                      <span className="time">
-                        <i className="ti-time" />
-                        09:35
-                      </span>
-                    </div>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Esse distinctio itaque at.
-                    </p>
+                  <div className="tm-title">
+                    <h4>Added</h4>
+                    <span className="time">
+                      <i className="ti-time" />7 Minutes Ago
+                    </span>
                   </div>
-                  <div className="timeline-task">
-                    <div className="icon bg3">
-                      <i className="ti-signal" />
-                    </div>
-                    <div className="tm-title">
-                      <h4>You Added Kaji Patha few minutes ago</h4>
-                      <span className="time">
-                        <i className="ti-time" />
-                        01 minutes ago
-                      </span>
-                    </div>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Esse distinctio itaque at.
-                    </p>
+                  <p>Lorem ipsum dolor sit amet consectetur.</p>
+                </div>
+                <div className="timeline-task">
+                  <div className="icon bg2">
+                    <i className="fa fa-exclamation-triangle" />
                   </div>
-                  <div className="timeline-task">
-                    <div className="icon bg1">
-                      <i className="fa fa-envelope" />
-                    </div>
-                    <div className="tm-title">
-                      <h4>Ratul Hamba sent you an email</h4>
-                      <span className="time">
-                        <i className="ti-time" />
-                        09:35
-                      </span>
-                    </div>
-                    <p>
-                      Hello sir , where are you, i am egerly waiting for you.
-                    </p>
-                  </div>
-                  <div className="timeline-task">
-                    <div className="icon bg2">
-                      <i className="fa fa-exclamation-triangle" />
-                    </div>
-                    <div className="tm-title">
-                      <h4>Rashed sent you an email</h4>
-                      <span className="time">
-                        <i className="ti-time" />
-                        09:35
-                      </span>
-                    </div>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Esse distinctio itaque at.
-                    </p>
-                  </div>
-                  <div className="timeline-task">
-                    <div className="icon bg2">
-                      <i className="fa fa-exclamation-triangle" />
-                    </div>
-                    <div className="tm-title">
-                      <h4>Rashed sent you an email</h4>
-                      <span className="time">
-                        <i className="ti-time" />
-                        09:35
-                      </span>
-                    </div>
-                  </div>
-                  <div className="timeline-task">
-                    <div className="icon bg3">
-                      <i className="fa fa-bomb" />
-                    </div>
-                    <div className="tm-title">
-                      <h4>Rashed sent you an email</h4>
-                      <span className="time">
-                        <i className="ti-time" />
-                        09:35
-                      </span>
-                    </div>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Esse distinctio itaque at.
-                    </p>
-                  </div>
-                  <div className="timeline-task">
-                    <div className="icon bg3">
-                      <i className="ti-signal" />
-                    </div>
-                    <div className="tm-title">
-                      <h4>Rashed sent you an email</h4>
-                      <span className="time">
-                        <i className="ti-time" />
-                        09:35
-                      </span>
-                    </div>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Esse distinctio itaque at.
-                    </p>
+                  <div className="tm-title">
+                    <h4>You missed you Password!</h4>
+                    <span className="time">
+                      <i className="ti-time" />
+                      09:20 Am
+                    </span>
                   </div>
                 </div>
+                <div className="timeline-task">
+                  <div className="icon bg3">
+                    <i className="fa fa-bomb" />
+                  </div>
+                  <div className="tm-title">
+                    <h4>Member waiting for you Attention</h4>
+                    <span className="time">
+                      <i className="ti-time" />
+                      09:35
+                    </span>
+                  </div>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Esse distinctio itaque at.
+                  </p>
+                </div>
+                <div className="timeline-task">
+                  <div className="icon bg3">
+                    <i className="ti-signal" />
+                  </div>
+                  <div className="tm-title">
+                    <h4>You Added Kaji Patha few minutes ago</h4>
+                    <span className="time">
+                      <i className="ti-time" />
+                      01 minutes ago
+                    </span>
+                  </div>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Esse distinctio itaque at.
+                  </p>
+                </div>
+                <div className="timeline-task">
+                  <div className="icon bg1">
+                    <i className="fa fa-envelope" />
+                  </div>
+                  <div className="tm-title">
+                    <h4>Ratul Hamba sent you an email</h4>
+                    <span className="time">
+                      <i className="ti-time" />
+                      09:35
+                    </span>
+                  </div>
+                  <p>Hello sir , where are you, i am egerly waiting for you.</p>
+                </div>
+                <div className="timeline-task">
+                  <div className="icon bg2">
+                    <i className="fa fa-exclamation-triangle" />
+                  </div>
+                  <div className="tm-title">
+                    <h4>Rashed sent you an email</h4>
+                    <span className="time">
+                      <i className="ti-time" />
+                      09:35
+                    </span>
+                  </div>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Esse distinctio itaque at.
+                  </p>
+                </div>
+                <div className="timeline-task">
+                  <div className="icon bg2">
+                    <i className="fa fa-exclamation-triangle" />
+                  </div>
+                  <div className="tm-title">
+                    <h4>Rashed sent you an email</h4>
+                    <span className="time">
+                      <i className="ti-time" />
+                      09:35
+                    </span>
+                  </div>
+                </div>
+                <div className="timeline-task">
+                  <div className="icon bg3">
+                    <i className="fa fa-bomb" />
+                  </div>
+                  <div className="tm-title">
+                    <h4>Rashed sent you an email</h4>
+                    <span className="time">
+                      <i className="ti-time" />
+                      09:35
+                    </span>
+                  </div>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Esse distinctio itaque at.
+                  </p>
+                </div>
+                <div className="timeline-task">
+                  <div className="icon bg3">
+                    <i className="ti-signal" />
+                  </div>
+                  <div className="tm-title">
+                    <h4>Rashed sent you an email</h4>
+                    <span className="time">
+                      <i className="ti-time" />
+                      09:35
+                    </span>
+                  </div>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Esse distinctio itaque at.
+                  </p>
+                </div>
               </div>
-              <div id="settings" className="tab-pane fade">
-                <div className="offset-settings">
-                  <h4>General Settings</h4>
-                  <div className="settings-list">
-                    <div className="s-settings">
-                      <div className="s-sw-title">
-                        <h5>Notifications</h5>
-                        <div className="s-swtich">
-                          <input type="checkbox" id="switch1" />
-                          <label htmlFor="switch1">Toggle</label>
-                        </div>
+            </div>
+            <div id="settings" className="tab-pane fade">
+              <div className="offset-settings">
+                <h4>General Settings</h4>
+                <div className="settings-list">
+                  <div className="s-settings">
+                    <div className="s-sw-title">
+                      <h5>Notifications</h5>
+                      <div className="s-swtich">
+                        <input type="checkbox" id="switch1" />
+                        <label htmlFor="switch1">Toggle</label>
                       </div>
-                      <p>
-                        Keep it 'On' When you want to get all the notification.
-                      </p>
                     </div>
-                    <div className="s-settings">
-                      <div className="s-sw-title">
-                        <h5>Show recent activity</h5>
-                        <div className="s-swtich">
-                          <input type="checkbox" id="switch2" />
-                          <label htmlFor="switch2">Toggle</label>
-                        </div>
+                    <p>
+                      Keep it 'On' When you want to get all the notification.
+                    </p>
+                  </div>
+                  <div className="s-settings">
+                    <div className="s-sw-title">
+                      <h5>Show recent activity</h5>
+                      <div className="s-swtich">
+                        <input type="checkbox" id="switch2" />
+                        <label htmlFor="switch2">Toggle</label>
                       </div>
-                      <p>
-                        The for attribute is necessary to bind our custom
-                        checkbox with the input.
-                      </p>
                     </div>
-                    <div className="s-settings">
-                      <div className="s-sw-title">
-                        <h5>Show your emails</h5>
-                        <div className="s-swtich">
-                          <input type="checkbox" id="switch3" />
-                          <label htmlFor="switch3">Toggle</label>
-                        </div>
+                    <p>
+                      The for attribute is necessary to bind our custom checkbox
+                      with the input.
+                    </p>
+                  </div>
+                  <div className="s-settings">
+                    <div className="s-sw-title">
+                      <h5>Show your emails</h5>
+                      <div className="s-swtich">
+                        <input type="checkbox" id="switch3" />
+                        <label htmlFor="switch3">Toggle</label>
                       </div>
-                      <p>Show email so that easily find you.</p>
                     </div>
-                    <div className="s-settings">
-                      <div className="s-sw-title">
-                        <h5>Show Task statistics</h5>
-                        <div className="s-swtich">
-                          <input type="checkbox" id="switch4" />
-                          <label htmlFor="switch4">Toggle</label>
-                        </div>
+                    <p>Show email so that easily find you.</p>
+                  </div>
+                  <div className="s-settings">
+                    <div className="s-sw-title">
+                      <h5>Show Task statistics</h5>
+                      <div className="s-swtich">
+                        <input type="checkbox" id="switch4" />
+                        <label htmlFor="switch4">Toggle</label>
                       </div>
-                      <p>
-                        The for attribute is necessary to bind our custom
-                        checkbox with the input.
-                      </p>
                     </div>
-                    <div className="s-settings">
-                      <div className="s-sw-title">
-                        <h5>Notifications</h5>
-                        <div className="s-swtich">
-                          <input type="checkbox" id="switch5" />
-                          <label htmlFor="switch5">Toggle</label>
-                        </div>
+                    <p>
+                      The for attribute is necessary to bind our custom checkbox
+                      with the input.
+                    </p>
+                  </div>
+                  <div className="s-settings">
+                    <div className="s-sw-title">
+                      <h5>Notifications</h5>
+                      <div className="s-swtich">
+                        <input type="checkbox" id="switch5" />
+                        <label htmlFor="switch5">Toggle</label>
                       </div>
-                      <p>Use checkboxes when looking for yes or no answers.</p>
                     </div>
+                    <p>Use checkboxes when looking for yes or no answers.</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          {/* offset area end */}
+        </div>
+        {/* offset area end */}
       </div>
     );
   }

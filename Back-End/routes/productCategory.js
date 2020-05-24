@@ -51,6 +51,16 @@ router.patch('/:id', getProductCategory , async (req,res) => {
     }
 })
 
+// Update One Using PUT
+router.put('/:id', function(req,res,next){
+    ProductCategory.findByIdAndUpdate({_id:req.params.id},req.body).then(function(){
+        ProductCategory.findOne({_id:req.params.id}).then(function(productCategory){
+            res.send(productCategory);
+        })
+    });  
+});
+
+
 // Deleting One
 router.delete('/:id', getProductCategory , async (req,res) => {
     try{

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class AddAccount extends Component {
   constructor(props) {
@@ -31,9 +33,21 @@ class AddAccount extends Component {
         },
         body: JSON.stringify(this.state),
       });
-
       console.log("Result: " + result);
-      this.setState({ redirect: "/adminlist" });
+      toast.success("✔️ Account Added Susseccfully !", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
+      setTimeout(function() { //Start the timer
+        this.setState({ redirect: "/adminlist" });//After 3 second, set redirect to true
+      }.bind(this), 3000)
+      
     } catch (error) {
       console.log(error.message);
     }
@@ -53,6 +67,7 @@ class AddAccount extends Component {
     }
     return (
       <div>
+        <ToastContainer />
         {/*[if lt IE 8]>
                 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
                 <![endif]*/}

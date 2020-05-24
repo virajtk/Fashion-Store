@@ -11,18 +11,10 @@ class CategoryList extends Component {
     };
   }
 
-  editAction(category) {
+  editAction = (category) => {
     // alert("Edit = " + category._id);
-    toast.success("☑️ Test", {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  }
+    window.sessionStorage.setItem("selectedCategory:", category._id);
+  };
 
   deleteAction = (category) => {
     const API_URL = "http://localhost:3000/category/" + category._id;
@@ -30,9 +22,8 @@ class CategoryList extends Component {
     try {
       let result = fetch(API_URL, { method: "delete" });
       console.log("Result: " + result);
-      this.componentDidMount();
-      this.componentDidMount();
-      toast.success("☑️ Category Deleted Succesfully !", {
+      
+      toast.success("✔️ Category Deleted Succesfully !", {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -41,11 +32,14 @@ class CategoryList extends Component {
         draggable: true,
         progress: undefined,
       });
-      
+
+      setTimeout(function() { //Start the timer
+        this.componentDidMount(); //After 1 second
+      }.bind(this), 1000)
     } catch (error) {
       console.log(error.message);
     }
-  }
+  };
 
   componentDidMount = () => {
     fetch("http://localhost:3000/category")
@@ -56,7 +50,7 @@ class CategoryList extends Component {
           categories: json,
         });
       });
-  }
+  };
 
   render() {
     let { isLoaded, categories } = this.state;
@@ -70,7 +64,7 @@ class CategoryList extends Component {
     } else {
       return (
         <div>
-          <ToastContainer/>
+          <ToastContainer />
           {/* Same as */}
           <ToastContainer />
           <div className="row">
@@ -94,7 +88,9 @@ class CategoryList extends Component {
                         <tbody>
                           {categories.map((category) => (
                             <tr key={category._id}>
-                              <th scope="row">{categories.indexOf(category) + 1}</th>
+                              <th scope="row">
+                                {categories.indexOf(category) + 1}
+                              </th>
                               <td>{category.mainCategory}</td>
                               <td>{category.subCategory}</td>
                               <td>{category.description}</td>
@@ -105,9 +101,11 @@ class CategoryList extends Component {
                                     border: "none",
                                     background: "none",
                                   }}
-                                  onClick={() => this.editAction(category)}
+                                  onClick={this.editAction.bind(this, category)}
                                 >
-                                  <i className="ti-pencil" />
+                                  <a href="/editcategory">
+                                    <i className="ti-pencil" />
+                                  </a>
                                 </button>
                               </td>
                               <td>

@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import AdminUserList from "../../admin-components/AdminUserList";
 import { Redirect } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class EditAdminProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      adminUser: [],
       fullName: "",
       userName: "",
       email: "",
@@ -24,20 +26,52 @@ class EditAdminProfile extends Component {
 
   async postData() {
     try {
-      let result = await fetch(
-        "http://localhost:3000/adminUser/" + AdminUserList._id,
-        {
-          method: "patch",
+      let id = sessionStorage.getItem("selectedUserID:");
+      let result;
+      if(this.state.newPassword){
+         result = await fetch("http://localhost:3000/adminUser/" + id,{
+          method: "put",
           headers: {
-            Accept: "application/json",
+            "Accept": "application/json",
             "Content-type": "application/json",
           },
-          body: JSON.stringify(this.state),
-        }
-      );
-
+          body: JSON.stringify({
+            "fullName": this.state.fullName,
+            "email": this.state.email,
+            "contactNo": this.state.contactNo,
+            "password": this.state.newPassword,
+          }),
+        });
+      }
+      else{
+        result = await fetch("http://localhost:3000/adminUser/" + id,{
+          method: "put",
+          headers: {
+            "Accept": "application/json",
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            "fullName": this.state.fullName,
+            "email": this.state.email,
+            "contactNo": this.state.contactNo,
+          }),
+        });
+      }
+      
       console.log("Result: " + result);
-      // this.setState({ redirect: "/adminlist" });
+      toast.success("✔️ Your Profile Updated Susseccfully !", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
+      setTimeout(function() { //Start the timer
+        this.setState({redirect: "/"}) //After 3 second, set redirect to true
+      }.bind(this), 3000)
     } catch (error) {
       console.log(error.message);
     }
@@ -51,12 +85,29 @@ class EditAdminProfile extends Component {
     });
   };
 
+  componentDidMount(){
+    let active_user_id = sessionStorage.getItem("activeUserID:");
+    fetch("http://localhost:3000/adminUser/" + active_user_id)
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          adminUser: json,
+          fullName: json.fullName,
+          userName: json.userName,
+          email: json.email,
+          contactNo: json.contactNo,
+          password: json.password,
+        });
+      });
+  }
+
   render() {
     if (this.state.redirect) {
       return <Redirect to={this.state.redirect} />;
     }
     return (
       <div>
+        <ToastContainer/>
         <div className="row">
           <div className="col-lg-12 mt-5">
             <div className="card">
@@ -117,8 +168,8 @@ class EditAdminProfile extends Component {
                           className="form-control style-input"
                           placeholder="Contact Number"
                           id="inputContactNo"
-                          name="password"
-                          value={this.state.password}
+                          name="contactNo"
+                          value={this.state.contactNo}
                           onChange={this.onChangeHandler}
                           required
                         />

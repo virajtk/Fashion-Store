@@ -30,7 +30,8 @@ class AddCategory extends Component {
         },
         body: JSON.stringify(this.state),
       });
-      toast.success("☑️ Category Added Susseccfully !", {
+      console.log("Result: " + result);
+      toast.success("✔️ Category Added Susseccfully !", {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -39,8 +40,11 @@ class AddCategory extends Component {
         draggable: true,
         progress: undefined,
       });
-      console.log("Result: " + result);
-      // this.setState({ redirect: "/categorylist" });
+
+      setTimeout(function() { //Start the timer
+        this.setState({redirect: "/categorylist"}) //After 3 second, set redirect to true
+      }.bind(this), 3000)
+      
     } catch (error) {
       console.log(error.message);
     }
@@ -55,9 +59,9 @@ class AddCategory extends Component {
   };
 
   render() {
-    // if (this.state.redirect) {
-    //   return <Redirect to={this.state.redirect} />;
-    // }
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />;
+    }
     return (
       <div>
         <ToastContainer />

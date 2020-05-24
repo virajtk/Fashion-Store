@@ -5,7 +5,7 @@ import {
     Route } from "react-router-dom";
 
 import AddtoCart from "./components/AddtoCart";
-import WishList from "./components/WishList";
+// import WishList from "./components/WishList";
 
 class customerLayout extends Component {
     render() {
@@ -277,9 +277,7 @@ class customerLayout extends Component {
                                                     <Route path="/cart">
                                                         <AddtoCart />
                                                     </Route>
-                                                    <Route path="/wishlist">
-                                                        <WishList />
-                                                    </Route>
+
                                                 </Switch>
                                             </Router>
                                         </div>

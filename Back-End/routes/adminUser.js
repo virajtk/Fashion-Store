@@ -63,6 +63,15 @@ router.patch('/:id', getAdminUser , async (req,res) => {
     }
 })
 
+// Update One Using PUT
+router.put('/:id', function(req,res,next){
+    AdminUser.findByIdAndUpdate({_id:req.params.id},req.body).then(function(){
+        AdminUser.findOne({_id:req.params.id}).then(function(adminUser){
+            res.send(adminUser);
+        })
+    });  
+});
+
 // Deleting One
 router.delete('/:id', getAdminUser , async (req,res) => {
     try{

@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
 import Categories from "./components/Categories";
 import SelectedItem from "./components/SelectedItem";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import Checkout from "./components/Checkout";
+import Wishlist from "./components/Wishlist";
+import DashHome from "./components/DashHome";
+import {BrowserRouter as Router, Route, Switch, NavLink} from "react-router-dom";
+
 
 
 class MainHomeLayout extends Component {
@@ -24,6 +28,7 @@ class MainHomeLayout extends Component {
 
         return (
             <div>
+                <Router>
                 {/*[if lt IE 8]>
                 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
                 <![endif]*/}
@@ -216,20 +221,20 @@ class MainHomeLayout extends Component {
                                         <nav>
                                             <ul id="nav_menu">
                                                 <li>
-                                                    <a href="#" onclick="return false;"><i className="" /><span>Home</span></a>
-                                                </li>
-                                                <li className="active">
-                                                    <a href=""><i className="" /><span>About Us</span></a>
+                                                    <NavLink to="/" exact><i className="" /><span>Home</span></NavLink>
                                                 </li>
                                                 <li>
-                                                    <a href="#" onclick="return false;" ><i className="" /><span>Categories</span></a>
+                                                    <NavLink to="/aboutus" exact><i className="" /><span>About Us</span></NavLink>
+                                                </li>
+                                                <li>
+                                                    <NavLink to="#" exact><i className="" /><span>Categories</span></NavLink>
                                                     <ul className="submenu">
                                                         {this.state.mainCategories.map(category => (
-                                                            <li onClick={this.handleSelectedCategory.bind(this,category)}><a href="/categoryList">{category}</a></li>
+                                                            <li onClick={this.handleSelectedCategory.bind(this,category)}><NavLink to="/categoryList">{category}</NavLink></li>
                                                         ))}
                                                     </ul>
                                                 </li>
-                                                <li><a href=""><i className="" /> <span>Contact Us</span></a></li>
+                                                <li> <NavLink to="/contactus" exact><i className="" /> <span>Contact Us</span></NavLink></li>
                                             </ul>
                                         </nav>
                                     </div>
@@ -257,16 +262,25 @@ class MainHomeLayout extends Component {
                         <div className="container">
                             <div className="row">
                                 <div className="col-lg-12">
-                                    <Router>
+                                    
                                         <Switch>
-                                            <Route path="/categoryList">
+                                            <Route path="/" exact>
+                                                <DashHome />
+                                            </Route>
+                                            <Route path="/categoryList" exact>
                                                 <Categories />
                                             </Route>
-                                            <Route path="/selectedItem">
+                                            <Route path="/selectedItem" exact>
                                                 <SelectedItem />
                                             </Route>
+                                            <Route path="/checkout">
+                                                <Checkout />
+                                            </Route>
+                                            <Route path="/wishlist">
+                                                <Wishlist />
+                                            </Route>
                                         </Switch>
-                                    </Router>
+                                    
 
                                     {/*<Checkout/>*/}
                                 </div>
@@ -470,6 +484,7 @@ class MainHomeLayout extends Component {
                     </div>
                 </div>
                 {/* offset area end */}
+                </Router>
             </div>
         );
     }
