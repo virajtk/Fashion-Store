@@ -86,7 +86,7 @@ class ProductList extends Component {
                                                 <tbody>
                                                 {products.map((product) => (
 
-                                                    <tr key={product._id}>
+                                                    <tr key={product._id} >
                                                         <th scope="row">{products.indexOf(product) + 1}</th>
                                                         <td>{product.mainCategory}</td>
                                                         <td>{product.productType}</td>
@@ -110,8 +110,8 @@ class ProductList extends Component {
                                                         </td>
                                                         <td>
                                                             <ul className="d-flex justify-content-center">
-                                                                <li className="mr-3"><a href="#" className="text-secondary"><i className="fa fa-edit" /></a></li>
-                                                                <li onClick={() => this.handleDeleteProduct(product)}><a href="#" className="text-danger"><i className="ti-trash"/></a></li>
+                                                                <li className="mr-3"><a className="text-secondary"><i className="fa fa-edit" /></a></li>
+                                                                <li onClick={() => this.handleDeleteProduct(product)}><a className="text-danger"><i className="ti-trash"/></a></li>
                                                             </ul>
                                                         </td>
                                                     </tr>
