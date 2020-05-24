@@ -1,35 +1,98 @@
 import React, { Component } from "react";
+import {toast, ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Redirect } from "react-router-dom";
 
 class DashboardLogin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: null,
+      userName: null,
       password: null,
       login: false,
-      store: null,
+      active: null,
+      redirect: null
     };
   }
 
-  login = () => {
-    let LOGIN_API = "";
+  // login = () => {
+  //   let LOGIN_API = "";
+  //   fetch(LOGIN_API, {
+  //     method: "POST",
+  //     body: JSON.stringify(this.state),
+  //   }).then((response) => {
+  //     response.json().then((result) => {
+  //       console.log("result", result);
+  //       localStorage.setItem(
+  //         "login",
+  //         JSON.stringify({
+  //           login: true,
+  //           store: result.token,
+  //           userid: result._id,
+  //           userrole: result.role,
+  //         })
+  //       );
+  //       this.storeCollector();
+  //     });
+  //   });
+  // };
+
+  login = (e) => {
+    e.preventDefault();
+    // console.log(this.state);
+    let LOGIN_API = 'http://localhost:3000/login/admin';
     fetch(LOGIN_API, {
       method: "POST",
-      body: JSON.stringify(this.state),
+      headers: {
+        'Accept': 'application/json',
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        "userName":this.state.userName,
+        "password":this.state.password
+      }),
     }).then((response) => {
       response.json().then((result) => {
         console.log("result", result);
-        localStorage.setItem(
-          "login",
-          JSON.stringify({
-            login: true,
-            store: result.token,
-            userid: result._id,
-            userrole: result.role,
-          })
-        );
-        this.storeCollector();
+        if(result.message){
+          // console.log("No User Found")
+          toast.error("🚫 User Not Found, UserName/Password does not Match", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+        if(result && result._id){
+          localStorage.setItem(
+            "login",
+            JSON.stringify({
+              login: true,
+              userName: result.userName,
+              userid: result._id,
+              userrole: result.role,
+            })
+          );
+          let userFullName = result.fullName;
+
+          toast.success("✔️ Welcome "+userFullName+", You're Loged In Succesfully !", {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+
+        }
+
+        setTimeout(function() { //Start the timer
+          this.storeCollector(); //After 2 second
+        }.bind(this), 2000)
       });
     });
   };
@@ -39,37 +102,48 @@ class DashboardLogin extends Component {
   }
 
   storeCollector() {
-    let store = JSON.parse(localStorage.getItem("login"));
-    if (store && store.login) {
+    let active = JSON.parse(localStorage.getItem("login"));
+    if (active && active.login) {
       this.setState({
         login: true,
-        store: store,
+        active: active,
+        redirect: "/"
       });
     }
   }
 
-  post(){
-    let token = "Bearer "+ this.state.store.token;
-    let LOGIN_API = "";
-    fetch(LOGIN_API, {
-      method: "POST",
-      headers: {
-        'Authorization': token
-      },
-      body: JSON.stringify(this.state),
-    }).then((response) => {
-      response.json().then((result) => {
-        console.log("result", result);
-      });
-    });
+  reload(){
+    window.location.reload(false);
   }
+
+  // post(){
+  //   let token = "Bearer "+ this.state.store.token;
+  //   let LOGIN_API = "";
+  //   fetch(LOGIN_API, {
+  //     method: "POST",
+  //     headers: {
+  //       'Authorization': token
+  //     },
+  //     body: JSON.stringify(this.state),
+  //   }).then((response) => {
+  //     response.json().then((result) => {
+  //       console.log("result", result);
+  //     });
+  //   });
+  // }
 
   render() {
     if (this.state.login) {
-      return <Redirect to="/" />;
+      return (
+        <div>
+          <Redirect to="/home"/>
+          <a href="/home" onClick={this.reload()}> </a>
+        </div>
+        )
     }
     return (
       <div>
+        <ToastContainer />
         {/*[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]*/}
@@ -84,8 +158,8 @@ class DashboardLogin extends Component {
             <div className="login-box ptb--100">
               <form
                 autoComplete="off"
-                onSubmit={() => {
-                  this.login();
+                onSubmit={(e) => {
+                  this.login(e);
                 }}
               >
                 <div className="login-form-head">
@@ -99,9 +173,9 @@ class DashboardLogin extends Component {
                       type="Username"
                       id="exampleInputEmail1"
                       onChange={(event) => {
-                        this.setState({ username: event.target.value });
+                        this.setState({ userName: event.target.value });
                       }}
-                      value={this.state.username}
+                      value={this.state.userName}
                       required
                     />
                     <i className="ti-email" />
@@ -115,7 +189,7 @@ class DashboardLogin extends Component {
                       onChange={(event) => {
                         this.setState({ password: event.target.value });
                       }}
-                      value={this.state.username}
+                      value={this.state.password}
                       required
                     />
                     <i className="ti-lock" />
