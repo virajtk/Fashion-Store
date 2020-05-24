@@ -22,6 +22,7 @@ function App() {
       {/* <Login/> */}
        <MainHomeLayout />
       {/* <Wishlist />*/}
+      {/* <MainHomeLayout /> */}
       {/* <Register/>*/}
       {/* <AddAccount /> */}
       {/* <AdminUserList /> */}

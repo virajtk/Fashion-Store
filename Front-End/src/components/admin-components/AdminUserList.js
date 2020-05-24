@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -9,12 +9,13 @@ class AdminUserList extends Component {
     this.state = {
       adminUsers: [],
       isLoaded: false,
-      link: null,
+      redirect: null,
     };
   }
 
   editAction(adminUser) {
     alert("Edit = " + adminUser._id);
+    window.sessionStorage.setItem("selectedUserID:", adminUser._id);
   }
 
   deleteAction(adminUser) {
@@ -35,7 +36,6 @@ class AdminUserList extends Component {
         draggable: true,
         progress: undefined,
       });
-      
     } catch (error) {
       console.log(error.message);
     }
@@ -53,8 +53,8 @@ class AdminUserList extends Component {
   }
 
   render() {
-    if (this.state.link) {
-      return <Link to={this.state.link} />;
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />;
     }
     let { isLoaded, adminUsers } = this.state;
     if (!isLoaded) {
@@ -91,7 +91,9 @@ class AdminUserList extends Component {
                         <tbody>
                           {adminUsers.map((adminUser) => (
                             <tr key={adminUser._id}>
-                              <th scope="row">{adminUsers.indexOf(adminUser) + 1}</th>
+                              <th scope="row">
+                                {adminUsers.indexOf(adminUser) + 1}
+                              </th>
                               <td>{adminUser.userName}</td>
                               <td>{adminUser.fullName}</td>
                               <td>{adminUser.role}</td>
@@ -106,7 +108,9 @@ class AdminUserList extends Component {
                                   }}
                                   onClick={() => this.editAction(adminUser)}
                                 >
-                                  <i className="ti-pencil" />
+                                  <a href="/editadminuser">
+                                    <i className="ti-pencil" />
+                                  </a>
                                 </button>
                               </td>
                               <td>

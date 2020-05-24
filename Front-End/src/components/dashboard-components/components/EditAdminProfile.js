@@ -6,6 +6,7 @@ class EditAdminProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      adminUser: [],
       fullName: "",
       userName: "",
       email: "",
@@ -25,7 +26,7 @@ class EditAdminProfile extends Component {
   async postData() {
     try {
       let result = await fetch(
-        "http://localhost:3000/adminUser/" + AdminUserList._id,
+        "http://localhost:3000/adminUser/" + this.state.adminUser._id,
         {
           method: "patch",
           headers: {
@@ -50,6 +51,22 @@ class EditAdminProfile extends Component {
       [name]: value,
     });
   };
+
+  componentDidMount(){
+    let active_user_id = sessionStorage.getItem("activeUserID:");
+    fetch("http://localhost:3000/adminUser/" + active_user_id)
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          adminUser: json,
+          fullName: json.fullName,
+          userName: json.userName,
+          email: json.email,
+          contactNo: json.contactNo,
+          password: json.password,
+        });
+      });
+  }
 
   render() {
     if (this.state.redirect) {
