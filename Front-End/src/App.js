@@ -9,6 +9,7 @@ import PrivateRoute from "./components/private-route/PrivateRoute";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 import { Provider } from "react-redux";
 import { connect } from "react-redux";
+import EditAdminProfile from "./components/dashboard-components/components/EditAdminProfile";
 
 import AddCategory from "./components/dashboard-components/components/AddCategory";
 import DashboardLogin from "./components/admin-components/DashboardLogin";
@@ -18,6 +19,7 @@ import AdminUserList from "./components/admin-components/AdminUserList";
 
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
+import EditUserProfile from "./components/Customer-Dashboard-Component/EditUserProfile";
 function App() {
   return (
 
@@ -31,7 +33,7 @@ function App() {
                 </Switch>
         {/* <Login/> */}
 
-        {<Register/> }
+        {<EditUserProfile/> }
         {/* <AddAccount /> */}
         {/* <AddCategory /> */}
 
