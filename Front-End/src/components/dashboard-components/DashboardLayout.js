@@ -20,6 +20,7 @@ import DashboardLogin from "../admin-components/DashboardLogin";
 import AddAccount from "../admin-components/AddAccount";
 import EditCategory from "./components/EditCategory";
 import EditAdminUser from "./components/EditAdminUser";
+import EditProduct from "./components/EditProduct";
 
 class DashboardLayout extends Component {
   constructor(props) {
@@ -609,6 +610,9 @@ class DashboardLayout extends Component {
                   </Route>
                   <Route path="/editcategory" exact>
                     <EditCategory />
+                  </Route>
+                  <Route path="/editproduct" exact>
+                    <EditProduct />
                   </Route>
                 </Switch>
               </div>
