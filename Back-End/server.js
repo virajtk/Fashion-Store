@@ -38,13 +38,20 @@ const productCategoryRouter = require("./routes/productCategory");
 app.use("/category", productCategoryRouter);
 
 // Product
-const productRouter = require("./routes/product");
-app.use("/product", productRouter);
+
+const productRouter = require('./routes/product')
+app.use('/product', productRouter)
+
+//user
+const userRouter = require('./routes/users')
+app.use('/user', userRouter)
+
 
 // adminLogin
 const adminLoginRouter = require("./routes/adminLogin");
 app.use("/adminlogin", adminLoginRouter );
 
 app.listen(3000, () => {
-  console.log("Server Started");
+    console.log('Server Started');
+
 });
