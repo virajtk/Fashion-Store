@@ -13,9 +13,9 @@ import AdminUserList from "./components/admin-components/AdminUserList";
 function App() {
   return (
     <div className="App">
-      <DashboardLayout />
+      {/*<DashboardLayout />*/}
       {/* <Login/> */}
-      {/* <MainHomeLayout />*/}
+       <MainHomeLayout />
       {/* <Register/>*/}
       {/* <AddAccount /> */}
       {/* <AdminUserList /> */}
