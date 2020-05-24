@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Product = require('../models/Product')
 const ProductCategory = require('../models/ProductCategory')
+const ReviewsAndRatings = require('../models/ReviewsAndRatings')
 
 // Getting all
 router.get('/all', async (req,res) => {
@@ -78,6 +79,44 @@ router.get('/findBySubCategory/:productType', async (req,res) => {
     }
 
 });
+
+//Getting Review for selected item
+router.get('/getItemReview/:itemID', async (req,res) => {
+
+    let reviewList = [];
+    try {
+        reviewList = await ReviewsAndRatings.find({
+            "itemID" : req.params.itemID
+        });
+        if ( reviewList == null ) {
+            return res.status(404).json({ message: 'Cannot find Product' })
+        }
+        else {
+            res.json(reviewList);
+        }
+    } catch (err) {
+        return res.status(500).json({ message : err.message})
+    }
+
+});
+
+//Creating Review for selected item
+router.post('/addItemReview', async (req,res) => {
+    const review = new ReviewsAndRatings({
+        itemID: req.body.itemID,
+        clientName: req.body.clientName,
+        review: req.body.review,
+        rating: req.body.rating,
+    })
+
+    try{
+        const newReview = await review.save()
+        res.status(201).json(newReview)
+    } catch (err) {
+        res.status(400).json({ message: err.message })
+    }
+})
+
 
 // Creating One
 router.post('/addproduct', async (req,res) => {

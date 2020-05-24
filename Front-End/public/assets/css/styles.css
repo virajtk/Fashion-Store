@@ -3564,3 +3564,42 @@ table.dataTable thead td {
     -webkit-transform: rotateX(0deg);
     transform: rotateX(0deg);
 }
+
+.status-p {
+    color: #fff;
+    background: #f51167;
+    padding: 0px 20px 1px;
+    border-radius: 20px;
+    display: inline-block;
+    text-transform: capitalize;
+    vertical-align: middle;
+}
+
+.reviewStyle {
+    height: 50vh;
+    max-height: 100vh;
+    overflow-y: scroll;
+
+
+}
+
+.reviewStyle::-webkit-scrollbar{
+    width: 10px;
+}
+.reviewStyle::-webkit-scrollbar-thumb{
+    background: #f51167;
+    border-radius: 5px;
+}
+
+/*::-webkit-scrollbar-thumb:hover{*/
+/*    background: #f41226;*/
+
+/*}*/
+
+.rate-popup{
+    margin-right: 23%;
+    margin-left: 23%;
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+}

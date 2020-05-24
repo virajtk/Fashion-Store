@@ -25,6 +25,7 @@ function App() {
       {/* <Wishlist />*/}
       {/* <MainHomeLayout /> */}
       {/* <Register/> */}
+
       {/* <AddAccount /> */}
       {/* <AdminUserList /> */}
       {/* <AddCategory /> */}
@@ -33,6 +34,7 @@ function App() {
       {/*<customerLayout />*/}
       {/*<DetailProductPage/>*/}
       {/*<Route exact path ="/product/:productId" component={Auth(DetailProductPage, null)},*/}
+    
     </div>
   );
 }

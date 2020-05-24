@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Product from "../../img/product/8.jpg";
+import {toast, ToastContainer} from "react-toastify";
 
 class AddProduct extends Component {
 
@@ -73,6 +74,15 @@ class AddProduct extends Component {
                     "color": this.state.color,
                 })
             });
+            toast.success("Product Added Successfully !", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
 
             console.log('Result: '+ result);
 
@@ -92,6 +102,7 @@ class AddProduct extends Component {
 
         return (
             <div>
+                <ToastContainer />
                 <div className="row">
                     <div className="col-lg-12 mt-5">
                         <div className="card">
