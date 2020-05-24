@@ -27,7 +27,7 @@ class Register extends Component {
 
     async postData(){
         try {
-            let result = await fetch("http://localhost:5000/user", {
+            let result = await fetch("http://localhost:3000/user", {
                 method: "post",
                 headers: {
                     "Accept" : "application/json",

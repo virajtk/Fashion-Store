@@ -44,6 +44,6 @@ const userRouter = require('./routes/users')
 app.use('/user', userRouter)
 
 
-app.listen(5000, () => {
+app.listen(3000, () => {
     console.log('Server Started');
 });
