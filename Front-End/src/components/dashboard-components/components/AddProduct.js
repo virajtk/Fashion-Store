@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Product from "../../img/product/8.jpg";
 import {toast, ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class AddProduct extends Component {
 

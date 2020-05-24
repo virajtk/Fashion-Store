@@ -29,7 +29,7 @@ function App() {
       {/* <AddAccount /> */}
       {/* <AdminUserList /> */}
       {/* <AddCategory /> */}
-      {/*<DashboardLogin/>*/}
+      {/* <DashboardLogin/> */}
       {/* <DashboardRegister/> */}
       {/*<customerLayout />*/}
       {/*<DetailProductPage/>*/}

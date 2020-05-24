@@ -6,6 +6,8 @@ import {
   Redirect,
 } from "react-router-dom";
 import { NavLink, Link } from "react-router-dom";
+import {toast, ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import AddCategory from "./components/AddCategory";
 import CategoryList from "./components/CategoryList";
@@ -26,17 +28,38 @@ class DashboardLayout extends Component {
       isLoaded: false,
       adminUser: [],
       redirect: null,
+      login: false,
+      renderAdmin: false,
+      renderStoreManager: false,
     };
   }
 
   logoutAction = () => {
     this.state.activeUser = [];
+    window.localStorage.clear();
+    window.sessionStorage.clear();
     // alert(this.state.activeUser);
-    this.setState({ redirect: "/logout" });
+    this.setState({ redirect: "/login" });
+
+    toast.success("✔️ You're Succesfully Loged Out", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   componentDidMount() {
-    const LogedUserID = "5ec9af249220cf31680c2bb3";
+    let active = JSON.parse(localStorage.getItem("login"));
+    if (active && active.login) {
+      this.setState({
+        login: true,
+      });
+
+      const LogedUserID = active.userid;
     fetch("http://localhost:3000/adminUser/" + LogedUserID)
       .then((res) => res.json())
       .then((json) => {
@@ -46,35 +69,48 @@ class DashboardLayout extends Component {
         });
         window.sessionStorage.setItem("activeUserID:", this.state.adminUser._id);
       });
+      
+    }
+    else{
+      
+      this.state.activeUser = [];
+    window.localStorage.clear();
+    window.sessionStorage.clear();
+    // alert(this.state.activeUser);
+    this.setState({ redirect: "/login" });
+    }
+    
   }
+
   render() {
     if (this.state.redirect) {
       return (
         <Router>
           <Redirect to={this.state.redirect} />
           <Switch>
-            <Route path="/logout" exact>
+            <Route path="/login" exact>
               <DashboardLogin />
             </Route>
           </Switch>
         </Router>
       );
     }
-    if (!this.state.adminUser) {
-      return (
-        <Router>
-          <Redirect to="/logout" />
-          <Switch>
-            <Route path="/logout" exact>
-              <DashboardLogin />
-            </Route>
-          </Switch>
-        </Router>
-      );
-    }
+    // if (!this.state.adminUser) {
+    //   return (
+    //     <Router>
+    //       <Redirect to="/logout" />
+    //       <Switch>
+    //         <Route path="/login" exact>
+    //           <DashboardLogin />
+    //         </Route>
+    //       </Switch>
+    //     </Router>
+    //   );
+    // }
 
     return (
       <div>
+        {/* <ToastContainer /> */}
         {/*[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]*/}
