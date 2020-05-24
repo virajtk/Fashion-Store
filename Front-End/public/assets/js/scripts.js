@@ -174,6 +174,44 @@
     }
     slider_area();
 
+
+    /*-------------------
+		Quantity change
+	--------------------- */
+    var proQty = $('.pro-qty');
+    proQty.prepend('<span class="dec qtybtn">-</span>');
+    proQty.append('<span class="inc qtybtn">+</span>');
+    proQty.on('click', '.qtybtn', function () {
+        var $button = $(this);
+        var oldValue = $button.parent().find('input').val();
+        if ($button.hasClass('inc')) {
+            var newVal = parseFloat(oldValue) + 1;
+        } else {
+            // Don't allow decrementing below zero
+            if (oldValue > 0) {
+                var newVal = parseFloat(oldValue) - 1;
+            } else {
+                newVal = 0;
+            }
+        }
+        $button.parent().find('input').val(newVal);
+    });
+
+    /*------------------
+		Category menu
+	--------------------*/
+    $('.category-menu > li').hover( function(e) {
+        $(this).addClass('active');
+        e.preventDefault();
+    });
+    $('.category-menu').mouseleave( function(e) {
+        $('.category-menu li').removeClass('active');
+        e.preventDefault();
+    });
+
+
+
+
     /*================================
     Fullscreen Page
     ==================================*/
@@ -223,5 +261,24 @@
             $('body').removeClass('expanded');
         });
     }
+
+    /*-------------------
+		Chechout Boostrap Validation
+	--------------------- */
+    window.addEventListener('load', function () {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.filter.call(forms, function (form) {
+            form.addEventListener('submit', function (event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+    }, false)
 
 })(jQuery);

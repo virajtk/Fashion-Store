@@ -1,10 +1,34 @@
 import React, {Component} from 'react';
-import Categories from "./Categories";
+import Categories from "./components/Categories";
+import SelectedItem from "./components/SelectedItem";
+import Checkout from "./components/Checkout";
+import Wishlist from "./components/Wishlist";
+import DashHome from "./components/DashHome";
+import {BrowserRouter as Router, Route, Switch, NavLink} from "react-router-dom";
+
+
 
 class MainHomeLayout extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            mainCategories : ['Woman Wear','Men Wear','Kids Wear','Bags and Purses','Footwear','Jewellery'],
+            selectedCategory: ''
+        };
+
+    }
+
+    handleSelectedCategory = (category) => {
+        window.sessionStorage.setItem("selectedCategory:",category);
+    };
+
     render() {
+
         return (
             <div>
+                <Router>
                 {/*[if lt IE 8]>
                 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
                 <![endif]*/}
@@ -197,61 +221,20 @@ class MainHomeLayout extends Component {
                                         <nav>
                                             <ul id="nav_menu">
                                                 <li>
-                                                    <a href=""><i className="" /><span>Home</span></a>
-                                                </li>
-                                                <li className="active">
-                                                    <a href=""><i className="" /><span>About Us</span></a>
+                                                    <NavLink to="/" exact><i className="" /><span>Home</span></NavLink>
                                                 </li>
                                                 <li>
-                                                    <a href="javascript:void(0)"><i className="" /><span>Categories</span></a>
+                                                    <NavLink to="/aboutus" exact><i className="" /><span>About Us</span></NavLink>
+                                                </li>
+                                                <li>
+                                                    <NavLink to="#" exact><i className="" /><span>Categories</span></NavLink>
                                                     <ul className="submenu">
-                                                        <li><a href="">bar chart</a></li>
-                                                        <li><a href="">line Chart</a></li>
-                                                        <li><a href="">pie chart</a></li>
+                                                        {this.state.mainCategories.map(category => (
+                                                            <li onClick={this.handleSelectedCategory.bind(this,category)}><NavLink to="/categoryList">{category}</NavLink></li>
+                                                        ))}
                                                     </ul>
                                                 </li>
-                                                <li className="mega-menu">
-                                                    <a href="javascript:void(0)"><i className="" /><span>Our Products</span></a>
-                                                    <ul className="submenu">
-                                                        <li><a href="">Accordion</a></li>
-                                                        <li><a href="">Alert</a></li>
-                                                        <li><a href="">Badge</a></li>
-                                                        <li><a href="">Button</a></li>
-                                                        <li><a href="">Button Group</a></li>
-                                                        <li><a href="">Cards</a></li>
-                                                        <li><a href="">Dropdown</a></li>
-                                                        <li><a href="">List Group</a></li>
-                                                        <li><a href="">Media Object</a></li>
-                                                        <li><a href="">Modal</a></li>
-                                                        <li><a href="">Pagination</a></li>
-                                                        <li><a href="">Popover</a></li>
-                                                        <li><a href="">Progressbar</a></li>
-                                                        <li><a href="">Tab</a></li>
-                                                        <li><a href="">Typography</a></li>
-                                                        <li><a href="">Form</a></li>
-                                                        <li><a href="">grid system</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li className="mega-menu">
-                                                    <a href="javascript:void(0)"><i className="" /> <span>Pages</span></a>
-                                                    <ul className="submenu">
-                                                        <li><a href="">Login</a></li>
-                                                        <li><a href="">Login 2</a></li>
-                                                        <li><a href="">Login 3</a></li>
-                                                        <li><a href="">Register</a></li>
-                                                        <li><a href="">Register 2</a></li>
-                                                        <li><a href="">Register 3</a></li>
-                                                        <li><a href="">Register 4</a></li>
-                                                        <li><a href="">Lock Screen</a></li>
-                                                        <li><a href="">Lock Screen 2</a></li>
-                                                        <li><a href="">reset password</a></li>
-                                                        <li><a href="">Pricing</a></li>
-                                                        <li><a href="">Error 404</a></li>
-                                                        <li><a href="">Error 500</a></li>
-                                                        <li><a href=""><i className="" /> <span>Invoice Summary</span></a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href=""><i className="" /> <span>Contact Us</span></a></li>
+                                                <li> <NavLink to="/contactus" exact><i className="" /> <span>Contact Us</span></NavLink></li>
                                             </ul>
                                         </nav>
                                     </div>
@@ -274,13 +257,32 @@ class MainHomeLayout extends Component {
                     </div>
                     {/* header area end */}
                     {/* page title area end */}
+
                     <div className="main-content-inner">
                         <div className="container">
                             <div className="row">
                                 <div className="col-lg-12">
+                                    
+                                        <Switch>
+                                            <Route path="/" exact>
+                                                <DashHome />
+                                            </Route>
+                                            <Route path="/categoryList" exact>
+                                                <Categories />
+                                            </Route>
+                                            <Route path="/selectedItem" exact>
+                                                <SelectedItem />
+                                            </Route>
+                                            <Route path="/checkout">
+                                                <Checkout />
+                                            </Route>
+                                            <Route path="/wishlist">
+                                                <Wishlist />
+                                            </Route>
+                                        </Switch>
+                                    
 
-                                    <Categories />
-
+                                    {/*<Checkout/>*/}
                                 </div>
                             </div>
                         </div>
@@ -290,17 +292,13 @@ class MainHomeLayout extends Component {
                     <footer>
                         <div className="home-footer-area">
                             <div className="social-links-warp">
-                                <div className="container">
-                                    <div className="social-links">
-                                        <a href="" className="instagram"><i className="fa fa-instagram"/><span>instagram</span></a>
-                                        <a href="" className="google-plus"><i className="fa fa-google-plus"/><span>g+plus</span></a>
-                                        <a href="" className="pinterest"><i className="fa fa-pinterest"/><span>pinterest</span></a>
-                                        <a href="" className="facebook"><i className="fa fa-facebook"/><span>facebook</span></a>
-                                        <a href="" className="twitter"><i className="fa fa-twitter"/><span>twitter</span></a>
-                                        <a href="" className="youtube"><i className="fa fa-youtube"/><span>youtube</span></a>
-                                        <a href="" className="tumblr"><i className="fa fa-tumblr-square"></i><span>tumblr</span></a>
-                                    </div>
-                                </div>
+                                <a href="" className="instagram"><i className="fa fa-instagram"/><span>instagram</span></a>
+                                <a href="" className="google-plus"><i className="fa fa-google-plus"/><span>g+plus</span></a>
+                                <a href="" className="pinterest"><i className="fa fa-pinterest"/><span>pinterest</span></a>
+                                <a href="" className="facebook"><i className="fa fa-facebook"/><span>facebook</span></a>
+                                <a href="" className="twitter"><i className="fa fa-twitter"/><span>twitter</span></a>
+                                <a href="" className="youtube"><i className="fa fa-youtube"/><span>youtube</span></a>
+                                <a href="" className="tumblr"><i className="fa fa-tumblr-square"/><span>tumblr</span></a>
                             </div>
                             <p>© Copyright 2020 <a href="">Divisima</a>. All right reserved. Developed by <a href="">Team BackSlash</a>.</p>
                         </div>
@@ -486,6 +484,7 @@ class MainHomeLayout extends Component {
                     </div>
                 </div>
                 {/* offset area end */}
+                </Router>
             </div>
         );
     }

@@ -2,7 +2,7 @@ GET http://localhost:3000/category
 
 ###
 
-GET http://localhost:3000/adminUser/5ebf7fe72e8cbedb8c6019ca
+GET http://localhost:3000/adminUser/5ebf7f7a2e8cbedb8c6019c9
 
 ###
 
@@ -21,7 +21,7 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/subscribers/5ebd4a7584a8ba210da6ebc8
+DELETE http://localhost:3000/category/5ec3b31930dfe7dda8cdb8d9
 
 
 ###
