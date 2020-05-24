@@ -1,10 +1,18 @@
 require("dotenv").config();
-
+const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
+const passport = require("passport");
+const users = require("./routes/api/users");
 
+// Bodyparser middleware
+app.use(
+    bodyParser.urlencoded({
+        extended: false
+    })
+);
 mongoose.connect(process.env.DATABASE_URL, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
@@ -42,12 +50,18 @@ app.use("/category", productCategoryRouter);
 const productRouter = require('./routes/product')
 app.use('/product', productRouter)
 
+// Passport middleware
+app.use(passport.initialize());
+// Passport config
+require("./config/passport")(passport);
+
 //user
-const userRouter = require('./routes/users')
-app.use('/user', userRouter)
+const userRouter = require('./routes/api/users')
+app.use('/api/users', users)
 
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Server up and running on port ${port} !`));
+//app.listen(3000, () => {
+  //  console.log('Server Started');
 
-app.listen(3000, () => {
-    console.log('Server Started');
-
-});
+//});
